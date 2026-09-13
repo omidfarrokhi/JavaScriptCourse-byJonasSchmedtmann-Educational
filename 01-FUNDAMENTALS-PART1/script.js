@@ -28,7 +28,9 @@ let job2 = "athlete";
 let myFirstJob = "Programmer";
 let mySecondJob = "athlete";
 */
+
 //////////////////////////////////////////////////////////////////
+
 /*
 // bool
 let javascriptIsFun = true;
@@ -55,8 +57,10 @@ console.log(x);
 // but it should return null!!!
 console.log(typeof x);
 */
+
 //////////////////////////////////////////////////////////////////////
 
+/*
 // defining using let (you can mutate)
 let age = 30;
 age = 31;
@@ -74,3 +78,34 @@ job = "teacher";
 // not defining anything at all!!!!!
 // terrible idea, because it will be defined globally!
 lastName = "schmedtmann";
+*/
+
+/////////////////////////////////////////////////////////////////////////
+
+// mathematical operators
+const now = 2037;
+const ageJonas = now - 1991;
+const ageSarah = now - 2018;
+console.log(ageJonas, ageSarah);
+
+console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+
+const firstName = "Omid";
+const lastName = "Farrokhi";
+console.log(firstName + "" + lastName);
+
+// assignment operators
+let x = 10 + 5;
+x += 10;
+x++;
+x--;
+console.log(x);
+
+// comparison operators
+console.log(ageJonas > ageSarah);
+console.log(ageSarah >= 18);
+
+const isFullAge = ageSarah >= 18;
+
+// operators presedence (- is applying first!)
+console.log(now - 1991 > now - 2010);
