@@ -1,13 +1,19 @@
-// expressions
-3 + 4;
-1991;
-true && falso && !false;
+const age = 23;
+age >= 18
+  ? console.log("I like to drink wine🍷")
+  : console.log("I like to drink water🥤");
 
-// statements
-if (23 > 10) {
-  const str = "23 is bigger";
+// more useful in declaring variables
+const drink = age >= 18 ? "wine🍷" : "water🥤";
+console.log(drink);
+
+// the if-else version
+let drink2;
+if (age >= 18) {
+  drink2 = "wine🍷";
+} else {
+  drink2 = "water🥤";
 }
 
-// accepts expressions
-// you can't write a statement inside a template literal
-console.log(`I'm ${2037 - 1991} years old`);
+// more usefulllll
+console.log(`I like to drink ${age >= 18 ? "wine🍷" : "water🥤"}`);
