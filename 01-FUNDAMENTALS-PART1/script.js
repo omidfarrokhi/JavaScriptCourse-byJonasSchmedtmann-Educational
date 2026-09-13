@@ -28,7 +28,8 @@ let job2 = "athlete";
 let myFirstJob = "Programmer";
 let mySecondJob = "athlete";
 */
-
+//////////////////////////////////////////////////////////////////
+/*
 // bool
 let javascriptIsFun = true;
 console.log(javascriptIsFun);
@@ -53,3 +54,23 @@ console.log(x);
 // type of null returns object!!!!
 // but it should return null!!!
 console.log(typeof x);
+*/
+//////////////////////////////////////////////////////////////////////
+
+// defining using let (you can mutate)
+let age = 30;
+age = 31;
+
+// defining using const (unmutable)
+const bithYear = 1991;
+// error >> birthYear = 1990;
+
+// defining using var (same as let)
+// but let is block scoped
+// var is function scoped
+var job = "programmer";
+job = "teacher";
+
+// not defining anything at all!!!!!
+// terrible idea, because it will be defined globally!
+lastName = "schmedtmann";
