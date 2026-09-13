@@ -1,16 +1,21 @@
-// type conversion
-const inputYear = "1991";
-console.log(Number(inputYear), inputYear);
-console.log(Number(inputYear) + 18);
+// 5 falsy value : 0, "", undefined, null, NaN
 
-console.log(Number("Jonas"));
-console.log(typeof Nan);
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean("Jonas"));
+console.log(Boolean({}));
+console.log(Boolean(""));
 
-console.log(String(23), 23);
+const money = 0;
+if (money) {
+  console.log("Don't spend it all :)");
+} else {
+  console.log("You should get a job!");
+}
 
-// type coercion
-//// Number to String
-console.log("I am" + 23 + "years old");
-//// String to Number (you cant perform the operation on strings)
-console.log("23" - "10" - 3);
-console.log("23" / "2");
+let height;
+if (height) {
+  console.log("YAY! Height is defined");
+} else {
+  console.log("Height is UNDEFINED");
+}
