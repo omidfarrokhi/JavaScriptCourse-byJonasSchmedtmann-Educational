@@ -1,18 +1,16 @@
-const age = 14;
+// type conversion
+const inputYear = "1991";
+console.log(Number(inputYear), inputYear);
+console.log(Number(inputYear) + 18);
 
-if (age >= 18) {
-  console.log("Sarah can start getting her driving license 🛻");
-} else {
-  const yearsLeft = 18 - age;
-  console.log(`Sarah is too young. Wait another ${yearsLeft}years :)`);
-}
+console.log(Number("Jonas"));
+console.log(typeof Nan);
 
-const birthYear = 1991;
+console.log(String(23), 23);
 
-let century;
-if (birthYear <= 2000) {
-  let century = 20;
-} else {
-  let century = 21;
-}
-console.log(century);
+// type coercion
+//// Number to String
+console.log("I am" + 23 + "years old");
+//// String to Number (you cant perform the operation on strings)
+console.log("23" - "10" - 3);
+console.log("23" / "2");
