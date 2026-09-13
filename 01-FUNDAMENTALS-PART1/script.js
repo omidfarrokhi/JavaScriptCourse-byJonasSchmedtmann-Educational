@@ -1,19 +1,18 @@
-const firstName = "Omid";
-const job = "teacher";
+const age = 14;
+
+if (age >= 18) {
+  console.log("Sarah can start getting her driving license 🛻");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(`Sarah is too young. Wait another ${yearsLeft}years :)`);
+}
+
 const birthYear = 1991;
-const year = 2037;
 
-const jonas =
-  "I'm" + firstName + ", a" + (year - birthYear) + "years old" + job + "!";
-console.log(jonas);
-
-const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
-console.log(jonasNew);
-
-console.log(`just a regular string...`);
-
-console.log("string with \n multiple \n lines");
-
-console.log(`string with
-  multiple
-  lines`);
+let century;
+if (birthYear <= 2000) {
+  let century = 20;
+} else {
+  let century = 21;
+}
+console.log(century);
