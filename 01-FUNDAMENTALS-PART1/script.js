@@ -1,26 +1,17 @@
-const age = 18;
+const hasDriverLicense = true;
+const hasGoodVision = true;
 
-if (age === 18) {
-  console.log("You just became an adult");
-}
+console.log(hasDriverLicense && hasGoodVision);
+console.log(hasDriverLicense || hasGoodVision);
+console.log(!hasDriverLicense);
 
-// loose equality operator
-console.log("18" == 18);
-// strict equality operator
-console.log("18" === "18");
+const canDrive = hasDriverLicense && hasGoodVision;
 
-const fav = Number(prompt("What's your favourite number?"));
-console.log(fav);
-console.log(typeof fav);
-
-if (fav === 23) {
-  console.log("Cool! 23 is an amazing number!");
-} else if (fav === 7) {
-  console.log("7 is also a cool number");
+if (canDrive) {
+  console.log("Sarah is able to drive");
 } else {
-  console.log("number is not 23 or 7");
+  console.log("Someone else should drive");
 }
 
-if (fav !== 23) {
-  console.log("why not 23?");
-}
+const isTired = true;
+console.log(hasDriverLicense && hasGoodVision && isTired);
