@@ -9,7 +9,7 @@ console.log("18" == 18);
 // strict equality operator
 console.log("18" === "18");
 
-const fav = prompt("What's your favourite number?");
+const fav = Number(prompt("What's your favourite number?"));
 console.log(fav);
 console.log(typeof fav);
 
