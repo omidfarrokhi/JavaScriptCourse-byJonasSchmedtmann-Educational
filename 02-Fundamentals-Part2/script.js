@@ -1,23 +1,13 @@
 "use strict";
 
-const jonas = [
-  "jonas",
-  "schmedtmann",
-  46,
-  "teacher",
-  ["micheal", "peter", "steven"],
-  true,
-];
-
-// backward
-for (let i = jonas.length - 1; i >= 0; i--) {
-  console.log(i, jonas[i]);
+let rep = 1;
+while (rep <= 10) {
+  console.log(`lifting weight repetition ${rep}`);
+  rep++;
 }
 
-for (let exercise = 1; exercise < 4; exercise++) {
-  console.log(`-----starting exercise ${exercise}`);
-
-  for (let rep = 1; rep < 6; rep++) {
-    console.log(`exercise ${exercise}: lifting weight rep`);
-  }
+let dice = Math.trunc(Math.random() * 6) + 1;
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+  dice = Math.trunc(Math.random() * 6) + 1;
 }
