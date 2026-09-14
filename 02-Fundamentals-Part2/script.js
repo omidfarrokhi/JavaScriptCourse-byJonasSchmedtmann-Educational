@@ -1,23 +1,15 @@
 "use strict";
 
-// defining a function
-function logger() {
-  console.log("my name is Jonas");
+// function declaration
+function calcAge(birthYear) {
+  return 2037 - birthYear;
 }
 
-// calling, running, invoking a function
-logger();
-logger();
-logger();
+const age1 = calcAge(1991);
 
-// function can also return
-function fruitProcessor(apples, oranges) {
-  const juice = `juice with ${apples} apples and ${oranges} oranges`;
-  return juice;
-}
+// function expression
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+};
 
-const appleJuice = fruitProcessor(5, 0);
-console.log(appleJuice);
-
-const appleOrangeJuice = fruitProcessor(2, 4);
-console.log(appleOrangeJuice);
+const age2 = calcAge2(1991);
