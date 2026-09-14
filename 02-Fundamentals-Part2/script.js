@@ -1,26 +1,32 @@
 "use strict";
 
-const friend1 = "micheal";
-const friend2 = "steven";
-const friend3 = "peter";
-
 const friends = ["micheal", "steven", "peter"];
+
+// add to the end (returns the new length)
+friends.push("omid");
 console.log(friends);
 
-const years = new Array(1991, 1984, 2008, 2020);
-
-console.log(friends[0]);
-console.log(friends[2]);
-
-console.log(friends.length);
-console.log(friends[friends.length - 1]);
-
-// even though it's a const var
-//  single elements can be modified
-friends[2] = "Jay";
+// add to the beginning (returns the new length)
+friends.unshift("john");
 console.log(friends);
-// what you can't do is replacing the entire array
-// friends = ["Bob", "Alice"];
 
-job = "teacher";
-const jonas = ["Jonas", "Schmedtmann", 2037 - 1991, job, friends];
+// remove last (returns the element)
+friends.pop();
+console.log(friends);
+
+// remove first (return the element)
+friends.shift();
+console.log(friends);
+
+// pos
+console.log(friends.indexOf("steven"));
+
+// ES6 method
+console.log(friends.includes("steven"));
+//// returns -1 if not in array
+console.log(friends.includes("bob"));
+//// check by strict equality operation
+//// does not do type coartion
+if (friends.includes("steven")) {
+  console.log("You have a friend name steven!!!");
+}
