@@ -8,33 +8,16 @@ const jonas = [
   ["micheal", "peter", "steven"],
   true,
 ];
-const types = [];
 
-const years = [1991, 2007, 1969, 2020];
-const ages = [];
-
-for (let i = 0; i < years.length; i++) {
-  ages.push(2026 - years[i]);
+// backward
+for (let i = jonas.length - 1; i >= 0; i--) {
+  console.log(i, jonas[i]);
 }
 
-console.log(ages);
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`-----starting exercise ${exercise}`);
 
-// continue and break
-
-// only strings
-console.log("---only strings-----");
-for (let i = 0; i < jonas.length; i++) {
-  if (typeof jonas[i] !== "string") continue;
-
-  console.log(jonas[i], typeof jonas[i]);
-}
-
-// break with numbers
-console.log("---break with number----");
-for (let i = 0; i < jonas.length; i++) {
-  if (typeof jonas[i] === "number") {
-    break;
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`exercise ${exercise}: lifting weight rep`);
   }
-
-  console.log(jonas[i], typeof jonas[i]);
 }
