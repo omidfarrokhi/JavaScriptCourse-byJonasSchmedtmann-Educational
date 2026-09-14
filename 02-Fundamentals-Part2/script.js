@@ -1,15 +1,26 @@
 "use strict";
 
-function cutFruits(fruit) {
-  return fruit * 4;
-}
+const friend1 = "micheal";
+const friend2 = "steven";
+const friend3 = "peter";
 
-function fruitProcessor(apples, oranges) {
-  const applePieces = cutFruits(apples);
-  const orangePieces = cutFruits(oranges);
+const friends = ["micheal", "steven", "peter"];
+console.log(friends);
 
-  const juice = `juice with ${applePieces} apple pieces and ${orangePieces} orange pieces.`;
-  return juice;
-}
+const years = new Array(1991, 1984, 2008, 2020);
 
-console.log(fruitProcessor(2, 3));
+console.log(friends[0]);
+console.log(friends[2]);
+
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+// even though it's a const var
+//  single elements can be modified
+friends[2] = "Jay";
+console.log(friends);
+// what you can't do is replacing the entire array
+// friends = ["Bob", "Alice"];
+
+job = "teacher";
+const jonas = ["Jonas", "Schmedtmann", 2037 - 1991, job, friends];
