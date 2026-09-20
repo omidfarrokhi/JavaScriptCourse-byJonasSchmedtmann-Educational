@@ -1,45 +1,55 @@
 'use strict';
 
-function calcAge(birthYear) {
-  const age = 2026 - birthYear;
+// variables
+console.log(me); //undefined
+//error
+// console.log(job);
+// console.log(year);
 
-  function printAge() {
-    const output = `${firstName}, You are ${age}, born in ${birthYear}`;
-    console.log(output);
+var me = 'jonas';
+let job = 'teacher';
+const year = 1991;
 
-    if (birthYear >= 1981 && birthYear <= 1996) {
-      // var is function scoped!!!!
-      var millenial = true;
-      // if we have a global and a local, engine chosse the nearest
-      const firstName = 'steven';
+// functions
+console.log(addDecl(2, 3)); // hoisted and works
+// console.log(addExpr(2, 3)); // can't access before initialization
+// console.log(addArrow(2, 3)); // can't access before initialization
 
-      // reassigning outer scope's variable
-      // we didn't define a new variable we modified the value
-      // so it will affect outer scope variable
-      output = 'NEW OUTPUT';
-
-      const str = `oh, and you're a millenial, ${firstName}`;
-      console.log(str);
-
-      function add(a, b) {
-        return a + b;
-      }
-    }
-
-    // error
-    // console.log(str);
-    console.log(millenial);
-    // error
-    // functions are block scoped in strict mode
-    // console.log(add(2, 3));
-  }
-  printAge();
-
-  return age;
+function addDec1(a, b) {
+  return a + b;
 }
 
-const firstName = 'jonas';
-calcAge(1991);
-// error:
-// console.log(age);
-// printAge();
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+// addExpr is not a function (because it's undefined)
+var addExpr = function (a, b) {
+  return a + b;
+};
+
+// addArrow is not a function (because it's undefined)
+var addArrow = (a, b) => a + b;
+
+// example (a hard to find bug because of the wierd var behavior)
+// var is undefined at the time and we enter the condition!!!!!
+if (!numProduct) {
+  deleteShoppingCart();
+}
+
+var numProduct = 10;
+
+function deleteShoppingCart() {
+  console.log('all products deleted!');
+}
+
+var x = 1;
+let y = 2;
+const z = 3;
+
+// the variables declared with var turn into a property in the window object!!!
+console.log(x === window.x);
+console.log(y === window.y);
+console.log(z === window.z);
