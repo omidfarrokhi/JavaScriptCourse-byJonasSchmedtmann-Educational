@@ -1,39 +1,48 @@
 'use strict';
 
-// dangerous behavior of var
-//// on the arrown function we get matilda
-//// because it adds the firstName = 'Matilda' property
-//// to the global window object!!!!!!!!!!!!!!!!!!!!!!!
-var firstName = 'Matilda';
+// object refreneces in practice (shallow vs. deep copies)
 
-const jonas = {
-  firstName: 'Jonas',
-  year: 1991,
-  calcAge: function () {
-    console.log(this);
-    console.log(2026 - this.year);
-
-    const isMillenial = function () {
-      // the this won't point to jonas
-      // it is called as a regular function so it's undefined
-      console.log(this.year >= 1981 && this.year <= 1996);
-    };
-    isMillenial();
-    //////////////////////////////////////////
-    // pre ES6 solution
-    // const self = this;
-    // and use self instead of this in the inner function
-    //////////////////////////////////////////////
-    // better newer solution
-    // use arrow function
-  },
-
-  greet: () => console.log(`Hey ${this.firstName}`),
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
 };
 
-//undefined
-//// arrow function don't get their own this
-//// they inherit the this of their of their parent(here is global scope)
-//// and that is the window object and it doesn't have a firstName property
-jonas.greet();
-jonas.calcAge();
+function marryperson(person, newLastName) {
+  person.lastName = newLastName;
+  return person;
+}
+
+// const marriedJessica = jessica;
+// marriedJessica.lastName = 'Davis';
+const marriedJessica = marryperson(jessica, 'Davis');
+
+// they are the same because we're using refrences to the same thing
+console.log('Before:', jessica);
+console.log('After:', marriedJessica);
+
+const lia = {
+  firstName: 'Lia',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+const liaCopy = { ...lia };
+liaCopy.lastName = 'Davis';
+
+console.log(lia, liaCopy);
+liaCopy.family.push('Mary');
+liaCopy.family.push('John');
+
+// the family variable is a refrence
+// we just made a first copy (Shallow copy)
+console.log('Before:', lia);
+console.log('After:', liaCopy);
+
+// Deep copy/clone
+const liaClone = structuredClone(lia);
+liaClone.family.push('mohammad');
+
+console.log('Original:', lia);
+console.log('Clone:', liaClone);
