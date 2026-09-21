@@ -41,63 +41,54 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`here is your pasta with ${ing1}, ${ing2} and ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
-// adding two elements at the beginning
-const arr = [7, 8, 9];
-// normally :{
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr);
+// SPREAD because it's on the right hand side of =
+const arr = [1, 2, ...[3, 4]];
 
-// the good wayyyyyyyy!!!
-const goodNewArr = [1, 2, ...arr];
-console.log(goodNewArr);
+// REST because it's on the left side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
 
-// also used in
-console.log(...goodNewArr);
+// you can use both rest and spread simultanously
+const [pizza, , risotto, ...otherFoods] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFoods);
 
-// it's a new entire array!
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(newMenu);
+// objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
 
-// copy array
-const mainMenuCopy = [...restaurant.mainMenu];
+// Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += number[i];
+    console.log(sum);
+  }
+};
 
-// join 2 arrays
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
+add(2, 3);
+add(5, 3, 7, 4);
 
-// The Spread operator works on all iterables!!!!
-// iterables: arrays, strings, maps, sets, but NOT OBJECTS!
-const str = 'Jonas';
-const letters = [...str, '', 'S.'];
-console.log(letters);
-console.log(...str);
-// error : we do not expect multiple values on the template literal
-// console.log(`${...str} schmedtmann`);
+const x = [23, 5, 7];
+add(...x);
+// in the function we pack
+// here we unpack
+// SPREAD AND REST DO THE EXACT OPPOSITE THING!!!
 
 // real-word example
-const ingredients = [
-  prompt("let's make pasta! ingredient 1?"),
-  prompt('ingredient 2?'),
-  prompt('ingredient 3?'),
-];
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushroom');
 
-console.log(ingredients);
-
-restaurant.orderPasta(...ingredients);
-
-/////////////////////////////////////////////////////////////
-// since ES6 Spread Operator can be used on objects!!!!!
-const newRestaurant = {
-  foundIn: 1998,
-  ...restaurant,
-  founder: 'Guiseppe',
-};
-
-console.log(newRestaurant);
-
-// making copy
-const restaurantCopy = { ...restaurant };
-restaurantCopy.name = 'Ristorante Roma';
-console.log(restaurant.name);
+////////////////////////////////////////////////////////////////////////////
+// SPREAD IS USED WHEN WE WOULD OTHERWISE USED VALUES SEPERATED BY COMMA  //
+// REST IS USED WHEN WE WOULD OTHERWISE USED VARIABLES SEPERATED BY COMMA //
+////////////////////////////////////////////////////////////////////////////
