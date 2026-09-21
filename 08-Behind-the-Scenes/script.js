@@ -6,49 +6,86 @@ const restaurant = {
   categories: ['Italian', 'Pizzaria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24 hours
+      close: 24,
+    },
+  },
 
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+
+  // using object destructuring for function arguments
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `order recieved!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`,
+    );
+  },
 };
 
-const arr = [2, 3, 4];
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sol, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
 
-// destructuring an array
-const [x, y, z] = arr;
-console.log(x, y, z);
+// using default values
+restaurant.orderDelivery({
+  address: 'Gisha22',
+  starterIndex: 1,
+});
 
-// taking the first two
-let [first, second] = restaurant.categories;
-console.log(first, second);
-// taking first and third
-const [first2, , third] = restaurant.categories;
-console.log(first2, third);
+// destructuring an objec
+//// there is no ordering!!!!!(just specify the names)
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
 
-// switching as usuall
-const temp = first;
-first = second;
-second = temp;
-
-// with destructuring
-[first, second] = [second, first];
-
-// recieve 2 return value from a function
-const [starter, mainCourse] = restaurant.order(2, 0);
-console.log(starter, mainCourse);
-
-// on nested arrays
-const nested = [2, 4, [5, 6]];
-// taking first and last
-// const [i, , j] = nested;
-const [i, , [j, k]] = nested;
-console.log(i, j, k);
+// destructuring with our own choosen names!!!!
+const {
+  name: retaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(retaurantName, hours, tags);
 
 // default values
-// assume we dont know number of elements beforehand
-// const [p, q, r] = [8, 9]; // we get undefined for r
-const [p = 1, q = 1, r = 1] = [8, 9];
-console.log(p, q, r);
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
+
+// mutating variables
+let a = 111;
+let b = 99;
+const obj = { a: 23, b: 7, c: 14 };
+// {a, b} = obj; // unexpected token (=) error
+// we can't assign something to a block
+// we have to wrap in paranthesis!!!
+({ a, b } = obj);
+console.log(a, b);
+
+// nested objects
+// const {
+//   fri: { open, close },
+// } = openingHours;
+// console.log(open, close);
+
+// you can also change names
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+console.log(o, c);
