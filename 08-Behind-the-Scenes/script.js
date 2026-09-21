@@ -1,55 +1,46 @@
 'use strict';
 
-// variables
-console.log(me); //undefined
-//error
-// console.log(job);
-// console.log(year);
+// window object
+console.log(this);
 
-var me = 'jonas';
-let job = 'teacher';
-const year = 1991;
-
-// functions
-console.log(addDecl(2, 3)); // hoisted and works
-// console.log(addExpr(2, 3)); // can't access before initialization
-// console.log(addArrow(2, 3)); // can't access before initialization
-
-function addDec1(a, b) {
-  return a + b;
-}
-
-const addExpr = function (a, b) {
-  return a + b;
+// for regular function it is undefined
+const calcAge = function (birthYear) {
+  console.log(2026 - birthYear);
+  console.log(this);
 };
 
-const addArrow = (a, b) => a + b;
+calcAge(1991);
 
-// addExpr is not a function (because it's undefined)
-var addExpr = function (a, b) {
-  return a + b;
+// for arrow it get the this of parent
+// here it's the window object
+const calcAgeArrow = birthYear => {
+  console.log(2026 - birthYear);
+  console.log(this);
 };
 
-// addArrow is not a function (because it's undefined)
-var addArrow = (a, b) => a + b;
+calcAgeArrow(1980);
 
-// example (a hard to find bug because of the wierd var behavior)
-// var is undefined at the time and we enter the condition!!!!!
-if (!numProduct) {
-  deleteShoppingCart();
-}
+const jonas = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+  },
+};
 
-var numProduct = 10;
+//this is the caller
+// the jonas object!!!
+jonas.calcAge();
 
-function deleteShoppingCart() {
-  console.log('all products deleted!');
-}
+const matilda = {
+  year: 2017,
+};
 
-var x = 1;
-let y = 2;
-const z = 3;
+// method borrowing
+matilda.calcAge = jonas.calcAge;
+// this points to matilda!!!! (matilda is calling it)
+matilda.calcAge();
 
-// the variables declared with var turn into a property in the window object!!!
-console.log(x === window.x);
-console.log(y === window.y);
-console.log(z === window.z);
+// method in a variable
+const f = jonas.calcAge;
+// this points to nothing(undefined) because it's a regular function
+f();
