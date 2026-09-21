@@ -1,48 +1,54 @@
 'use strict';
 
-// object refreneces in practice (shallow vs. deep copies)
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavainti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzaria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-const jessica = {
-  firstName: 'Jessica',
-  lastName: 'Williams',
-  age: 27,
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 };
 
-function marryperson(person, newLastName) {
-  person.lastName = newLastName;
-  return person;
-}
+const arr = [2, 3, 4];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
 
-// const marriedJessica = jessica;
-// marriedJessica.lastName = 'Davis';
-const marriedJessica = marryperson(jessica, 'Davis');
+// destructuring an array
+const [x, y, z] = arr;
+console.log(x, y, z);
 
-// they are the same because we're using refrences to the same thing
-console.log('Before:', jessica);
-console.log('After:', marriedJessica);
+// taking the first two
+let [first, second] = restaurant.categories;
+console.log(first, second);
+// taking first and third
+const [first2, , third] = restaurant.categories;
+console.log(first2, third);
 
-const lia = {
-  firstName: 'Lia',
-  lastName: 'Williams',
-  age: 27,
-  family: ['Alice', 'Bob'],
-};
+// switching as usuall
+const temp = first;
+first = second;
+second = temp;
 
-const liaCopy = { ...lia };
-liaCopy.lastName = 'Davis';
+// with destructuring
+[first, second] = [second, first];
 
-console.log(lia, liaCopy);
-liaCopy.family.push('Mary');
-liaCopy.family.push('John');
+// recieve 2 return value from a function
+const [starter, mainCourse] = restaurant.order(2, 0);
+console.log(starter, mainCourse);
 
-// the family variable is a refrence
-// we just made a first copy (Shallow copy)
-console.log('Before:', lia);
-console.log('After:', liaCopy);
+// on nested arrays
+const nested = [2, 4, [5, 6]];
+// taking first and last
+// const [i, , j] = nested;
+const [i, , [j, k]] = nested;
+console.log(i, j, k);
 
-// Deep copy/clone
-const liaClone = structuredClone(lia);
-liaClone.family.push('mohammad');
-
-console.log('Original:', lia);
-console.log('Clone:', liaClone);
+// default values
+// assume we dont know number of elements beforehand
+// const [p, q, r] = [8, 9]; // we get undefined for r
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r);
