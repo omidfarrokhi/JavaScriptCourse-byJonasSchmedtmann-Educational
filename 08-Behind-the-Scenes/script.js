@@ -36,56 +36,68 @@ const restaurant = {
       `order recieved!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`,
     );
   },
+
+  // use the spread operator on function parameters
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`here is your pasta with ${ing1}, ${ing2} and ${ing3}`);
+  },
 };
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'Via del Sol, 21',
-  mainIndex: 2,
-  starterIndex: 2,
-});
+// adding two elements at the beginning
+const arr = [7, 8, 9];
+// normally :{
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
 
-// using default values
-restaurant.orderDelivery({
-  address: 'Gisha22',
-  starterIndex: 1,
-});
+// the good wayyyyyyyy!!!
+const goodNewArr = [1, 2, ...arr];
+console.log(goodNewArr);
 
-// destructuring an objec
-//// there is no ordering!!!!!(just specify the names)
-const { name, openingHours, categories } = restaurant;
-console.log(name, openingHours, categories);
+// also used in
+console.log(...goodNewArr);
 
-// destructuring with our own choosen names!!!!
-const {
-  name: retaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
-console.log(retaurantName, hours, tags);
+// it's a new entire array!
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
 
-// default values
-const { menu = [], starterMenu: starters = [] } = restaurant;
-console.log(menu, starters);
+// copy array
+const mainMenuCopy = [...restaurant.mainMenu];
 
-// mutating variables
-let a = 111;
-let b = 99;
-const obj = { a: 23, b: 7, c: 14 };
-// {a, b} = obj; // unexpected token (=) error
-// we can't assign something to a block
-// we have to wrap in paranthesis!!!
-({ a, b } = obj);
-console.log(a, b);
+// join 2 arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
 
-// nested objects
-// const {
-//   fri: { open, close },
-// } = openingHours;
-// console.log(open, close);
+// The Spread operator works on all iterables!!!!
+// iterables: arrays, strings, maps, sets, but NOT OBJECTS!
+const str = 'Jonas';
+const letters = [...str, '', 'S.'];
+console.log(letters);
+console.log(...str);
+// error : we do not expect multiple values on the template literal
+// console.log(`${...str} schmedtmann`);
 
-// you can also change names
-const {
-  fri: { open: o, close: c },
-} = openingHours;
-console.log(o, c);
+// real-word example
+const ingredients = [
+  prompt("let's make pasta! ingredient 1?"),
+  prompt('ingredient 2?'),
+  prompt('ingredient 3?'),
+];
+
+console.log(ingredients);
+
+restaurant.orderPasta(...ingredients);
+
+/////////////////////////////////////////////////////////////
+// since ES6 Spread Operator can be used on objects!!!!!
+const newRestaurant = {
+  foundIn: 1998,
+  ...restaurant,
+  founder: 'Guiseppe',
+};
+
+console.log(newRestaurant);
+
+// making copy
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurant.name);
