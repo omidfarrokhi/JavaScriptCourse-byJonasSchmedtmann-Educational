@@ -48,47 +48,43 @@ const restaurant = {
   },
 };
 
-// SPREAD because it's on the right hand side of =
-const arr = [1, 2, ...[3, 4]];
+// SOME FACTS ABOUT LOGICAL OPERATORS
+// we can use any data type,
+// return any data type,
+// we have short-circuiting!!!!!
 
-// REST because it's on the left side of =
-const [a, b, ...others] = [1, 2, 3, 4, 5];
-console.log(a, b, others);
+// OR
+// if the first value is truthy
+// don't look at second just return the first!!!
+console.log(3 || 'Jonas'); // 3
+console.log('' || 'Jonas'); // jonas
+console.log(true || 0); // true
+// no short-circuiting so the second value is returned
+console.log(undefined || null); // null
 
-// you can use both rest and spread simultanously
-const [pizza, , risotto, ...otherFoods] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu,
-];
-console.log(pizza, risotto, otherFoods);
+// general
+console.log(undefined || 0 || '' || 'hello' || 23 || null); // 'hello'
 
-// objects
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays);
+// usefull pattern
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
 
-// Functions
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sum += number[i];
-    console.log(sum);
-  }
-};
+// do
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
 
-add(2, 3);
-add(5, 3, 7, 4);
+///// WARNING : BUT THIS WON'T WORK IF THE ACTUAL NUMBER OF GUESTS IS ZERO!!!!
 
-const x = [23, 5, 7];
-add(...x);
-// in the function we pack
-// here we unpack
-// SPREAD AND REST DO THE EXACT OPPOSITE THING!!!
+// AND
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
 
-// real-word example
-restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
-restaurant.orderPizza('mushroom');
+// general
+console.log('hello' && 23 && null && 'Jonas'); // null
 
-////////////////////////////////////////////////////////////////////////////
-// SPREAD IS USED WHEN WE WOULD OTHERWISE USED VALUES SEPERATED BY COMMA  //
-// REST IS USED WHEN WE WOULD OTHERWISE USED VARIABLES SEPERATED BY COMMA //
-////////////////////////////////////////////////////////////////////////////
+// usefull pattern
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushroom', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushroom', 'spinach');
