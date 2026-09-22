@@ -74,6 +74,12 @@ const guests2 = restaurant.numGuests || 10;
 console.log(guests2);
 
 ///// WARNING : BUT THIS WON'T WORK IF THE ACTUAL NUMBER OF GUESTS IS ZERO!!!!
+//////////////////////////////////////////////////////////////////////////////// SOLUTION : Nullish Coalescing Operator
+
+// Nullish: null and undefined (NOT 0 or '')
+restaurant.numGuests = 0;
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
 
 // AND
 console.log(0 && 'Jonas');
