@@ -5,15 +5,15 @@ const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const openingHours = {
   // post ES6 we can also compute properties names
   // in addition to the values
-  weekdays[3]: {
+  thu: {
     open: 12,
     close: 22,
   },
-  weekdays[4]: {
+  fri: {
     open: 11,
     close: 23,
   },
-  weekdays[5]: {
+  sat: {
     open: 0, //open 24 hours
     close: 24,
   },
@@ -56,12 +56,33 @@ const restaurant = {
   },
 };
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+//// reading the value of undefined
+// if (restaurant.openingHours.mon) {
+// console.log(restaurant.openingHours.mon.open);
+// }
 
-for (const item of menu) {
-  console.log(item);
+//// actually it's far worst ;??
+// if (restaurant.openingHours && restaurant.openingHours.mon) {
+//   console.log(restaurant.openingHours.mon.open);
+// }
+
+// OPTIONAL CHANING
+//// we get undefined not error
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`on ${day} we open at ${open}`);
 }
 
-for (const [i, el] of menu.entries()) {
-  console.log(`${i + 1}: ${el}`);
-}
+// on Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// on Arrays
+const users = [{ name: 'Jonas', email: 'hello@jonas' }];
+
+console.log(users[0]?.name ?? 'user array empty');
