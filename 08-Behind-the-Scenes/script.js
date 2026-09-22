@@ -48,49 +48,33 @@ const restaurant = {
   },
 };
 
-// SOME FACTS ABOUT LOGICAL OPERATORS
-// we can use any data type,
-// return any data type,
-// we have short-circuiting!!!!!
+const rest1 = {
+  name: 'Capri',
+  numGuests: 20,
+};
 
-// OR
-// if the first value is truthy
-// don't look at second just return the first!!!
-console.log(3 || 'Jonas'); // 3
-console.log('' || 'Jonas'); // jonas
-console.log(true || 0); // true
-// no short-circuiting so the second value is returned
-console.log(undefined || null); // null
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
 
-// general
-console.log(undefined || 0 || '' || 'hello' || 23 || null); // 'hello'
+// short-circuiting
+// rest1.numGuests = rest1.numGuests || 10;
+// rest1.numGuests ||= 10;
+// rest2.numGuests = rest2.numGuests || 10;
+// rest2.numGuests ||= 10;
+// ^ this won't work when value is zeor!!!!
 
-// usefull pattern
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1);
+// use nullish assignment operator (null or undefined is only falsey)
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
 
-// do
-const guests2 = restaurant.numGuests || 10;
-console.log(guests2);
+// also on &&
+// rest1.owner = rest1.owner && '<ANONYMUOS>';
+// rest2.owner = rest2.owner && '<ANONYMUOS>';
 
-///// WARNING : BUT THIS WON'T WORK IF THE ACTUAL NUMBER OF GUESTS IS ZERO!!!!
-//////////////////////////////////////////////////////////////////////////////// SOLUTION : Nullish Coalescing Operator
+rest1.owner &&= '<ANONYMUOS>';
+rest2.owner &&= '<ANONYMUOS>';
 
-// Nullish: null and undefined (NOT 0 or '')
-restaurant.numGuests = 0;
-const guestCorrect = restaurant.numGuests ?? 10;
-console.log(guestCorrect);
-
-// AND
-console.log(0 && 'Jonas');
-console.log(7 && 'Jonas');
-
-// general
-console.log('hello' && 23 && null && 'Jonas'); // null
-
-// usefull pattern
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('mushroom', 'spinach');
-}
-
-restaurant.orderPizza && restaurant.orderPizza('mushroom', 'spinach');
+console.log(rest1);
+console.log(rest2);
