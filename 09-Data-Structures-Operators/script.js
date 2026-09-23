@@ -1,35 +1,57 @@
 'use strict';
 
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+const airline = 'TAP Air Portugal';
+const plant = 'A320';
 
-// 1.
-const events = gameEvents.values();
-const eventsNoDuplicate = [...new Set(events)];
-console.log(eventsNoDuplicate);
+// indexing
+console.log(plane[0]);
+console.log(plane[1]);
 
-// 2.
-gameEvents.delete(64);
+// length
+console.log(airline.length);
 
-// 3.
-const numEvents = gameEvents.size;
-const avgEvents = 90 / numEvents;
-console.log(avgEvents);
+// index of
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal')); // case sensetive
 
-// 4.
-for (const [time, event] of gameEvents) {
-  console.log(
-    `[${time < 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${time}: ${event}`,
-  );
-}
+// slicing
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+
+// mostly we don't know the string's charactistic
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('You got the middle seat 😬');
+  } else {
+    console.log('You were lucky 😎');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('2E');
+
+// but why it works?
+// aren't Strings primitives?
+// why do they have methods?
+// isn't method just for Objects???????????????????
+
+// indeed :>>>
+// JS is so smart !!!!!!!!!!!!!!
+// whenever we call a method on a String
+// JS automatically convert that String primitive to an String Object,
+// on that Object the method is called,
+// then it converts back!!!
+
+// this happens behind the scene :))))
+console.log(new String('Jonas'));
+console.log(typeof new String('Jonas'));
