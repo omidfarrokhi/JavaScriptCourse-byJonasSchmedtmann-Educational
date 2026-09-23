@@ -1,57 +1,56 @@
 'use strict';
 
 const airline = 'TAP Air Portugal';
-const plant = 'A320';
 
-// indexing
-console.log(plane[0]);
-console.log(plane[1]);
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
 
-// length
-console.log(airline.length);
+// fix capitalization in name
+const passenger = 'jOnaS';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
 
-// index of
-console.log(airline.indexOf('r'));
-console.log(airline.lastIndexOf('r'));
-console.log(airline.indexOf('Portugal')); // case sensetive
+// comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = '  Hello@Jonas.Io \n';
 
-// slicing
-console.log(airline.slice(4));
-console.log(airline.slice(4, 7));
+const noramlizedEmail = loginEmail.toLowerCase().trim();
+console.log(noramlizedEmail);
+console.log(email === noramlizedEmail);
 
-// mostly we don't know the string's charactistic
-console.log(airline.slice(0, airline.indexOf(' ')));
-console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+// replacing
+const priceGB = '288,97';
+const priceUS = priceGB.replace('', '$').replace(',', '.');
+console.log(priceUS);
 
-console.log(airline.slice(-2));
-console.log(airline.slice(1, -1));
+const announcement =
+  'All passengers come to boarding door 23, boarding door 23!';
 
-const checkMiddleSeat = function (seat) {
-  // B and E are middle seats
-  const s = seat.slice(-1);
-  if (s === 'B' || s === 'E') {
-    console.log('You got the middle seat 😬');
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate'));
+
+// old method (regex)
+console.log(announcement.replace(/door/g, 'gate'));
+
+// Booleans
+const plane = 'A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Airb'));
+console.log(plane.endsWith('neo'));
+
+// practice exercise
+const checkBaggage = function (item) {
+  const baggage = DataTransferItemList.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
   } else {
-    console.log('You were lucky 😎');
+    console.log('Welcome aboard');
   }
 };
 
-checkMiddleSeat('11B');
-checkMiddleSeat('23C');
-checkMiddleSeat('2E');
-
-// but why it works?
-// aren't Strings primitives?
-// why do they have methods?
-// isn't method just for Objects???????????????????
-
-// indeed :>>>
-// JS is so smart !!!!!!!!!!!!!!
-// whenever we call a method on a String
-// JS automatically convert that String primitive to an String Object,
-// on that Object the method is called,
-// then it converts back!!!
-
-// this happens behind the scene :))))
-console.log(new String('Jonas'));
-console.log(typeof new String('Jonas'));
+checkBaggage('I have a laptop, some Food and pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
