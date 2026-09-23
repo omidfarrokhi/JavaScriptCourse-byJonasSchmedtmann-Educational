@@ -1,5 +1,23 @@
 'use strict';
 
+const italianFoods = new Set([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil',
+]);
+
+const mexicanFoods = new Set([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic',
+]);
+
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const openingHours = {
@@ -81,3 +99,40 @@ const staffUnique = [...new Set(staff)];
 
 // how many unique character in my name
 console.log(new Set('jonasschmedtmann').size);
+
+///////////////////////////////////
+// NEW OPERATION ADDED TO SETS ////////
+/////// BRAND NEW - ES2025 ////////////////////
+
+// Intersection
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log('Itersection', commonFoods);
+console.log([...commonFoods]);
+
+// Union
+const italianMexicanFusion = italianFoods.union(mexicanFoods);
+console.log('Union:', italianMexicanFusion);
+
+/// this won't give us unique
+console.log([...italianFoods, ...mexicanFoods]);
+// the correct one
+console.log([...new Set([...italianFoods, ...mexicanFoods])]);
+
+////// Diference
+const uniqueItalianFoods = italianFoods.difference(mexicanFoods);
+console.log('Difference italian', uniqueItalianFoods);
+
+const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
+console.log('Difference mexican', uniqueMexicanFoods);
+
+// Delta
+const uniqueItalianMexicanFoods =
+  italianFoods.symmetricDifference(mexicanFoods);
+console.log(uniqueItalianMexicanFoods);
+
+// Is Subset of?
+console.log(italianFoods.isSubsetOf(mexicanFoods));
+// Is Superset of?
+console.log(italianFoods.isSupersetOf(mexicanFoods));
+// Is Disjoint from?
+console.log(italianFoods.isDisjointFrom(mexicanFoods));
