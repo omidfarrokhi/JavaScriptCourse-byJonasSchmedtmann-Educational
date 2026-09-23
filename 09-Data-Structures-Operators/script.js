@@ -74,65 +74,48 @@ const restaurant = {
   },
 };
 
-// No Duplicates!!!
-const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta']);
-console.log(ordersSet);
+const rest = new Map();
 
-console.log(new Set('Jonas'));
+// SET method
+rest.set('name', 'Classico Italiano');
 
-// methods
-console.log(ordersSet.size);
-console.log(ordersSet.has('Pizza'));
-console.log(ordersSet.has('Bread'));
-ordersSet.add('Garlic Bread');
-ordersSet.delete('Risotto');
-// ordersSet.clear();
+// it returned the modifed map!!!!
+console.log(rest.set(2, 'Lisbon'));
+// we can chain
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'we are open :D')
+  .set(false, 'we are closed :(');
 
-// no Order
-// no indexing
-//error: console.log(ordersSet[0]);
-for (const order of ordersSet) console.log(order);
+// GET method
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
 
-// useful use-case (knowing or retrieving unique values)
-const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
-const staffUnique = [...new Set(staff)];
+// HAS method
+console.log(rest.has('categories'));
 
-// how many unique character in my name
-console.log(new Set('jonasschmedtmann').size);
+// DELETE method
+// but it's slow (don't use it :/)
+rest.delete(2);
 
-///////////////////////////////////
-// NEW OPERATION ADDED TO SETS ////////
-/////// BRAND NEW - ES2025 ////////////////////
+// CLEAR method
+// rest.clear();
 
-// Intersection
-const commonFoods = italianFoods.intersection(mexicanFoods);
-console.log('Itersection', commonFoods);
-console.log([...commonFoods]);
+console.log(rest);
+console.log(rest.size);
 
-// Union
-const italianMexicanFusion = italianFoods.union(mexicanFoods);
-console.log('Union:', italianMexicanFusion);
+// for objects it won't work this way:
+// rest.set([1, 2], 'Test');
+// this is a whole new object
+// rest.get([1, 2]);
+// we need a refrence
+const arr = [1, 2];
+rest.set(arr, 'test');
+console.log(rest.get(arr));
 
-/// this won't give us unique
-console.log([...italianFoods, ...mexicanFoods]);
-// the correct one
-console.log([...new Set([...italianFoods, ...mexicanFoods])]);
-
-////// Diference
-const uniqueItalianFoods = italianFoods.difference(mexicanFoods);
-console.log('Difference italian', uniqueItalianFoods);
-
-const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
-console.log('Difference mexican', uniqueMexicanFoods);
-
-// Delta
-const uniqueItalianMexicanFoods =
-  italianFoods.symmetricDifference(mexicanFoods);
-console.log(uniqueItalianMexicanFoods);
-
-// Is Subset of?
-console.log(italianFoods.isSubsetOf(mexicanFoods));
-// Is Superset of?
-console.log(italianFoods.isSupersetOf(mexicanFoods));
-// Is Disjoint from?
-console.log(italianFoods.isDisjointFrom(mexicanFoods));
+// SO WE CAN PUT OBJECTSSSSS ASSSS MAP KEYSSSSS
+// HOW COOL IS THATTTTTTTTTTTTTT
+rest.set(document.querySelector('h1'), 'Heading');
