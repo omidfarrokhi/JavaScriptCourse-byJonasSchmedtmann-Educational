@@ -1,78 +1,97 @@
 'use strict';
 
-const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-
-const openingHours = {
-  // post ES6 we can also compute properties names
-  // in addition to the values
-  thu: {
-    open: 12,
-    close: 22,
-  },
-  fri: {
-    open: 11,
-    close: 23,
-  },
-  sat: {
-    open: 0, //open 24 hours
-    close: 24,
-  },
-};
-
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavainti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzaria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  // before ES6
-  // openingHours: openingHours,
-
-  // ES6 enhanced object literal
-  openingHours,
-
-  // ES6 easier way to write methods
-  // no need to explicitly declare function keyword
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
-
-  // using object destructuring for function arguments
-  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
-    console.log(
-      `order recieved!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`,
-    );
-  },
-
-  // use the spread operator on function parameters
-  orderPasta(ing1, ing2, ing3) {
-    console.log(`here is your pasta with ${ing1}, ${ing2} and ${ing3}`);
-  },
-
-  orderPizza(mainIngredient, ...otherIngredients) {
-    console.log(mainIngredient);
-    console.log(otherIngredients);
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
   },
 };
 
-// property names
-const properties = Object.keys(openingHours);
-console.log(properties);
+// 1.
+const [players1, players2] = game.players;
+console.log(players1, players2);
+// 2.
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+// 3.
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+// 4.
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// 5.
+const { team1, x: draw, team2 } = game.odds;
+// or also you can
+// const {odds: {team1, x: draw, team2}} = game;
+console.log(team1, draw, team2);
 
-let openStr = `We are open on ${properties.length} days:`;
-for (const day of properties) {
-  openStr += `${day},`;
+// 6.
+const printGoals = function (...players) {
+  console.log(`${players.length} goals were scored`);
+};
+
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals('Davies', 'Muller');
+printGoals(...game.scored);
+
+// 7.
+team1 < team2 && console.log('Team1 is more likely to win');
+team1 > team2 && console.log('Team2 is more likely to win');
+
+for (let [index, goalScorer] of game.scored.entries()) {
+  console.log(`Goal ${index + 1}: ${goalScorer}`);
 }
-console.log(openStr);
 
-// property values
-const values = Object.values(openingHours);
-console.log(values);
-
-// entire object
-const entries = Object.entries(openingHours);
-
-for (const [key, { open, close }] of entries) {
-  console.log(`On ${key} we ope at ${open} and close at ${close}.`);
+const odds = Object.values(game.odds);
+let avg = 0;
+for (let odd of odds) {
+  avg += odd;
 }
+avg /= odds.length;
+console.log(avg);
+
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory of ${game[team]}`;
+  console.log(`Odd of ${teamStr} : ${odd}`);
+}
+
+// BONUS
+// So the solution is to loop over the array, and add the array elements as object properties, and then increase the count as we encounter a new occurence of a certain element
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+console.log(scorers);
