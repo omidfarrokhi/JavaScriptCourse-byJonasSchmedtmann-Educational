@@ -74,48 +74,37 @@ const restaurant = {
   },
 };
 
-const rest = new Map();
+// better way than .set()
 
-// SET method
-rest.set('name', 'Classico Italiano');
+const question = new Map([
+  ['question', 'what is the best programming language?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JS'],
+  ['correct', 3],
+  [true, 'Correct!!!!'],
+  [false, 'try again:('],
+]);
+console.log(question);
 
-// it returned the modifed map!!!!
-console.log(rest.set(2, 'Lisbon'));
-// we can chain
-rest
-  .set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'we are open :D')
-  .set(false, 'we are closed :(');
+// it's similar to Object.entries method!!!!!!
+console.log(Object.entries(openingHours));
 
-// GET method
-console.log(rest.get('name'));
-console.log(rest.get(true));
-console.log(rest.get(1));
+// conver object to map
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
 
-// HAS method
-console.log(rest.has('categories'));
+// iteration (the quiz app)
+console.log(question.get('question'));
 
-// DELETE method
-// but it's slow (don't use it :/)
-rest.delete(2);
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
 
-// CLEAR method
-// rest.clear();
+const answer = Number(prompt('Your answer'));
+console.log(question.get(answer === question.get('correct')));
 
-console.log(rest);
-console.log(rest.size);
-
-// for objects it won't work this way:
-// rest.set([1, 2], 'Test');
-// this is a whole new object
-// rest.get([1, 2]);
-// we need a refrence
-const arr = [1, 2];
-rest.set(arr, 'test');
-console.log(rest.get(arr));
-
-// SO WE CAN PUT OBJECTSSSSS ASSSS MAP KEYSSSSS
-// HOW COOL IS THATTTTTTTTTTTTTT
-rest.set(document.querySelector('h1'), 'Heading');
+// convert back map to array
+console.log(...question);
