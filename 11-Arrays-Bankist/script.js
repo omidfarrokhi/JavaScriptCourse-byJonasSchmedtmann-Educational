@@ -111,3 +111,21 @@ console.log([...arr, ...arr2]);
 
 // JOIN
 console.log(letters.join('-'));
+
+// THE NEW AT METHOD
+const arr = [23, 11, 64];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// getting last element
+console.log(arr[arr.length - 1]);
+console.log(arr.slice(-1)[0]);
+
+// now better
+console.log(arr.at(-1));
+// better for method chaining
+// but it depends
+
+// also works on strings
+console.log('jonas'.at(0));
+console.log('jonas'.at(-1));
