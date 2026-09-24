@@ -1,24 +1,36 @@
 'use strict';
 
-const bookings = [];
-
-// adding defaultssssssssssss
-const createBooking = function (flightNum, numPassengers = 1, price = 199) {
-  // before ES5
-  // numPassengers = numPassengers || 1;
-  // price = price || 199;
-
-  const booking = {
-    flightNum,
-    numPassengers,
-    price,
-  };
-  console.log(booking);
-  bookings.push(booking);
+const flight = 'LH234';
+const jonas = {
+  name: 'Jonas Schmedtmann',
+  passport: 234556252345,
 };
 
-createBooking('LH123');
-createBooking('LH123', 2, 800);
-// skipping a parameter
-// using the default
-createBooking('LH123', undefined, 1000);
+const checkIn = function (flightNum, passenger) {
+  flightNum = 'LH999';
+  passenger.name = 'Mr. ' + passenger.name;
+
+  if (passenger.passport === 234556252345) {
+    alert('Checked In');
+  } else {
+    alert('Wrong passport');
+  }
+};
+
+checkIn(flight, jonas);
+console.log(flight);
+console.log(jonas);
+
+// this is the same as doing
+const flightNum = flight;
+const passenger = jonas;
+
+// errors that can accure
+const newPassport = function (person) {
+  person.passport = Math.trunc(Math.random() * 100000000000);
+};
+
+newPassport(jonas);
+checkIn(flight, jonas);
+// we get two diffrent output by calling the same function twice
+// that's the side effect of manipulation in the jonas object :{{
