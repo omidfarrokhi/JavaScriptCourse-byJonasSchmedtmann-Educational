@@ -19,3 +19,6 @@ const createBooking = function (flightNum, numPassengers = 1, price = 199) {
 
 createBooking('LH123');
 createBooking('LH123', 2, 800);
+// skipping a parameter
+// using the default
+createBooking('LH123', undefined, 1000);
