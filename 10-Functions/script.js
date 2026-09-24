@@ -1,36 +1,30 @@
 'use strict';
 
-const flight = 'LH234';
-const jonas = {
-  name: 'Jonas Schmedtmann',
-  passport: 234556252345,
+const oneWord = function (str) {
+  return str.replaceAll(' ', '').toLowerCase();
 };
 
-const checkIn = function (flightNum, passenger) {
-  flightNum = 'LH999';
-  passenger.name = 'Mr. ' + passenger.name;
-
-  if (passenger.passport === 234556252345) {
-    alert('Checked In');
-  } else {
-    alert('Wrong passport');
-  }
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
 };
 
-checkIn(flight, jonas);
-console.log(flight);
-console.log(jonas);
+// higher-order function
+const transformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed strig: ${fn(str)}`);
 
-// this is the same as doing
-const flightNum = flight;
-const passenger = jonas;
-
-// errors that can accure
-const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 100000000000);
+  console.log(`Transformed by: ${fn.name}`);
 };
 
-newPassport(jonas);
-checkIn(flight, jonas);
-// we get two diffrent output by calling the same function twice
-// that's the side effect of manipulation in the jonas object :{{
+transformer('JavaScript is the best!!!', upperFirstWord);
+transformer('JavaScript is the best!!!', oneWord);
+
+// JS uses callbacks all the time!!!!!!
+const high5 = function () {
+  console.log('👋');
+};
+document.body.addEventListener('click', high5);
+
+// another use-case
+['jonas', 'martha', 'adam'].forEach(high5);
