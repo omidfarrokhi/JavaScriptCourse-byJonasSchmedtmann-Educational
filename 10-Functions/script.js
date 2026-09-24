@@ -1,16 +1,18 @@
 'use strict';
 
-// we want a function that run one and only once
+const secureBooking = function () {
+  let passengerCount = 0;
 
-// this can work but nothing is stopping us from calling the function again
-const runOnce = function () {
-  console.log('This will never run again');
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
 };
-runOnce();
 
-// imidiently invoked function expression (IIFE)
-(function () {
-  console.log('This will never run again');
-})();
+const booker = secureBooking();
 
-(() => console.log('This will also never run again'))();
+booker();
+booker();
+booker();
+
+console.dir(booker);
