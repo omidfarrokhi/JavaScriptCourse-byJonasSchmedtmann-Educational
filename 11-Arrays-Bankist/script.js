@@ -1,26 +1,22 @@
 'use strice';
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
 
-// for-of
-for (const [i, movement] of movements.entries()) {
-  if (movement > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
-  }
-}
-console.log('-------------------for each------------');
-
-// for-each (it works with a call-back function)
-movements.forEach(function (movement, i, arr) {
-  if (movement > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  } else {
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
-  }
+// for-each also works with maps
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
 });
 
-////////////////////////////////////////////////
-// CONTINUE AND BREAK DOES NOT WORK WITH FOR EACH!!!!!!!!!!
-/////////////////////////////////////////////////////////////////////////
+// also on sets
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+// the second parameter is completely useless in sets
+// because we dont have an index nor keys in sets
+// its the same as first for integrity
+currenciesUnique.forEach(function (value, key, maps) {
+  console.log(`${key}: ${value}`);
+});
