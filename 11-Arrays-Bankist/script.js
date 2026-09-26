@@ -130,3 +130,23 @@ const movementsDescriptions = movements.map(
 );
 
 console.log(movementsDescriptions);
+
+// FILTER METHOD
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+console.log(movements);
+console.log(deposits);
+
+/// with for loop
+// const depositsFor = [];
+// for (const mov of movements) {
+//   if (mov > 0) {
+//     depositsFor.push(mov);
+//   }
+// }
+// console.log(depositsFor);
+
+// the arrow easier form
+const withdrawals = movements.filter(mov => mov < 0);
