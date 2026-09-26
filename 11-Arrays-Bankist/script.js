@@ -124,3 +124,14 @@ const createUsernames = function (accounts) {
 };
 createUsernames(accounts);
 console.log(accounts);
+
+const firstWithdrwal = movements.find(mov => mov < 0);
+
+console.log(movements);
+console.log(firstWithdrwal);
+
+console.log(accounts);
+
+// VERY VERY VERY USEFUL PATTERN
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
