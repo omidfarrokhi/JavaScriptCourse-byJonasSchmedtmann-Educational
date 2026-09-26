@@ -5,6 +5,8 @@
 // BANKIST APP
 
 // Data
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
@@ -72,7 +74,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">
         ${i + 1} ${type}
       </div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>
   `;
 
@@ -84,10 +86,32 @@ displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+  console.log(movements);
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
 
 const createUsernames = function (accounts) {
   accounts.forEach(function (account) {
@@ -100,103 +124,3 @@ const createUsernames = function (accounts) {
 };
 createUsernames(accounts);
 console.log(accounts);
-
-// /////////////////////////////////////////////////
-// /////////////////////////////////////////////////
-// // LECTURES
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-// ////////////////////////////////////////////////
-// THE MAP METHOD
-
-const eurToUsd = 1.1;
-
-const movementsUsd = movements.map(function (mov) {
-  return mov * eurToUsd;
-});
-
-// arrow
-const movementsUsdArrow = movements.map(mov => mov * eurToUsd);
-
-console.log(movements);
-console.log(movementsUsd);
-console.log(movementsUsdArrow);
-
-// with for-of
-
-const movementsUsdFor = [];
-for (const mov of movements) {
-  movementsUsdFor.push(mov * eurToUsd);
-}
-console.log(movementsUsdFor);
-
-const movementsDescriptions = movements.map(
-  (mov, i, arr) =>
-    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`,
-);
-
-console.log(movementsDescriptions);
-
-// FILTER METHOD
-const deposits = movements.filter(function (mov) {
-  return mov > 0;
-});
-
-console.log(movements);
-console.log(deposits);
-
-// with for loop
-// const depositsFor = [];
-// for (const mov of movements) {
-//   if (mov > 0) {
-//     depositsFor.push(mov);
-//   }
-// }
-// console.log(depositsFor);
-
-// the arrow easier form
-const withdrawals = movements.filter(mov => mov < 0);
-
-// REDUCE METHOD
-// accumulator is like a snowball summing up the value
-// const balance = movements.reduce(function (acc, cur, i, arr) {
-//   console.log(`Iteration ${i}: ${acc}`);
-//   return acc + cur;
-// }, 0);
-// console.log(balance);
-
-// with for loop
-// let balance2 = 0;
-// for (const mov of movements) {
-//   balance2 += mov;
-// }
-// console.log(balance2);
-
-// the arrow easier form
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balance);
-
-// maximum value
-const max = movements.reduce(function (acc, mov) {
-  if (acc > mov) {
-    return acc;
-  } else {
-    return mov;
-  }
-}, movements[0]);
-console.log(max);
-
-///////////////////////////////////////////
-const calcAverageHumanAge = function (ages) {
-  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-
-  const adults = humanAges.filter(age => age >= 18);
-
-  // const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
-  const average = adults.reduce(
-    (acc, age, i, arr) => acc + age / arr.length,
-    0,
-  );
-  // (2 + 3) / 2  is same as 2 / 2 + 3 / 2
-};
