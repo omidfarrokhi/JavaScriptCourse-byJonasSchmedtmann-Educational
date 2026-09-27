@@ -200,3 +200,21 @@ btnClose.addEventListener('click', function (e) {
 
   inputClosePin.value = inputCloseUsername.value = '';
 });
+
+//  THE NEW findLast() METHOD
+// introduced in ES 2023
+// starts searching from last to the first
+console.log(movements);
+const lastWithrawal = movements.findLast(mov => mov < 0);
+console.log(lastWithrawal);
+
+// THE NEW findLastIndex() METHOD
+// ES 2023
+// starts searching from end and return the index instead of value
+
+const latestLargeMovementIndex = movements.findLastIndex(mov => mov > 1000);
+
+console.log(latestLargeMovementIndex);
+console.log(
+  `Your latest large movement was ${movements.length - latestLargeMovementIndex} movements age`,
+);
