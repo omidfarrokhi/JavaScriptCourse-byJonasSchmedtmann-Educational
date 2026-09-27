@@ -63,10 +63,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
+  // .textContent = 0
 
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -215,35 +218,10 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = inputCloseUsername.value = '';
 });
 
-// .sort() METHOD
-
-// Strings
-const owners = ['jonas', 'omid', 'adam', 'martha'];
-console.log(owners.sort());
-// it mutates the original array!!!
-console.log(owners);
-
-// Numbers
-console.log(movements);
-// this does not work!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-// JS sort by converting everything to strings :///////////
-// console.log(movements.sort());
-
-// return < 0 ---- a, b (don't change)
-// return > 0 ---- b, a (switch)
-
-// Accending
-// movements.sort((a, b) => {
-//   if (a > b) return 1;
-//   if (a < b) return -1;
-// });
-movements.sort((a, b) => a - b);
-console.log(movements);
-
-// Descending
-// movements.sort((a, b) => {
-//   if (a > b) return -1;
-//   if (a < b) return 1;
-// });
-movements.sort((a, b) => b - a);
-console.log(movements);
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log('click');
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
