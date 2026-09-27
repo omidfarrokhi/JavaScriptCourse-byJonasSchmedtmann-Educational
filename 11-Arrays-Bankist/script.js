@@ -215,117 +215,35 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = inputCloseUsername.value = '';
 });
 
-// flat METHOD
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat());
+// .sort() METHOD
 
-// the flat method only goas one level deep
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat()); // same as .flat(1)
-console.log(arrDeep.flat(2));
+// Strings
+const owners = ['jonas', 'omid', 'adam', 'martha'];
+console.log(owners.sort());
+// it mutates the original array!!!
+console.log(owners);
 
-// extracting all movements
-// const acccountMovements = accounts.map(acc => acc.movements);
-// console.log(acccountMovements);
-// const allMovements = acccountMovements.flat();
-// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
-// console.log(overalBalance);
+// Numbers
+console.log(movements);
+// this does not work!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+// JS sort by converting everything to strings :///////////
+// console.log(movements.sort());
 
-// the cleaner better approach
-const overalBalance = accounts
-  .map(acc => acc.movements)
-  .flat()
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance);
+// return < 0 ---- a, b (don't change)
+// return > 0 ---- b, a (switch)
 
-// turns out the using of map and the flat
-// is a very common operation
-const overalBalance2 = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance2);
+// Accending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
 
-const breeds = [
-  {
-    breed: 'German Shepherd',
-    averageWeight: 32,
-    activities: ['fetch', 'swimming'],
-  },
-  {
-    breed: 'Dalmatian',
-    averageWeight: 24,
-    activities: ['running', 'fetch', 'agility'],
-  },
-  {
-    breed: 'Labrador',
-    averageWeight: 28,
-    activities: ['swimming', 'fetch'],
-  },
-  {
-    breed: 'Beagle',
-    averageWeight: 12,
-    activities: ['digging', 'fetch'],
-  },
-  {
-    breed: 'Husky',
-    averageWeight: 26,
-    activities: ['running', 'agility', 'swimming'],
-  },
-  {
-    breed: 'Bulldog',
-    averageWeight: 36,
-    activities: ['sleeping'],
-  },
-  {
-    breed: 'Poodle',
-    averageWeight: 18,
-    activities: ['agility', 'fetch'],
-  },
-];
-
-// 1.
-const huskyWeight = breeds.find(breed => breed.breed === 'Husky').averageWeight;
-console.log(huskyWeight);
-
-// 2.
-const dogBothActivities = breeds.find(
-  breed =>
-    breed.activities.includes('fetch') && breed.activities.includes('running'),
-)?.breed;
-console.log(dogBothActivities);
-
-// 3.
-const allActivities = breeds.map(breed => breed.activities).flat();
-console.log(allActivities);
-
-// 4.
-const uniqueActivities = [...new Set(allActivities)];
-console.log(uniqueActivities);
-
-// 5.
-const swimmingAdjacent = [
-  ...new Set(
-    breeds
-      .filter(breed => breed.activities.includes('swimming'))
-      .map(breed => breed.activities)
-      .flat()
-      .filter(activity => activity !== 'swimming'),
-  ),
-];
-console.log(swimmingAdjacent);
-
-// 6.
-console.log(breeds.every(breed => breed.averageWeight > 10));
-
-// 7.
-console.log(breeds.some(breed => breed.activities.length >= 3));
-
-// BONUS:
-const fetchWeights = breeds
-  .filter(breed => breed.activities.includes('fetch'))
-  .map(breed => breed.averageWeight);
-
-const heaviestFetchBread = Math.max(...fetchWeights);
-
-console.log(fetchWeights);
-console.log(heaviestFetchBread);
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
