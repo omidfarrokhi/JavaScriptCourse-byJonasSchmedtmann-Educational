@@ -215,25 +215,32 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = inputCloseUsername.value = '';
 });
 
-console.log(movements);
+// flat METHOD
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
 
-// testing with equality
-console.log(movements.includes(-130));
+// the flat method only goas one level deep
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat()); // same as .flat(1)
+console.log(arrDeep.flat(2));
 
-// check if there is any
-const anyDeposits = movements.some(mov => mov > 0);
-console.log(anyDeposits);
+// extracting all movements
+// const acccountMovements = accounts.map(acc => acc.movements);
+// console.log(acccountMovements);
+// const allMovements = acccountMovements.flat();
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
 
-// we can write the inclues with some
-// console.log(movements.some(mov => mov === -130));
+// the cleaner better approach
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
 
-// check if all satisfy the condition
-console.log(movements.every(mov => mov > 0));
-console.log(account4.movements.every(mov => mov > 0));
-
-// seperate callback
-// better practice in the direction of DRY principals
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// turns out the using of map and the flat
+// is a very common operation
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
