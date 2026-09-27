@@ -178,6 +178,20 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -201,20 +215,25 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = inputCloseUsername.value = '';
 });
 
-//  THE NEW findLast() METHOD
-// introduced in ES 2023
-// starts searching from last to the first
 console.log(movements);
-const lastWithrawal = movements.findLast(mov => mov < 0);
-console.log(lastWithrawal);
 
-// THE NEW findLastIndex() METHOD
-// ES 2023
-// starts searching from end and return the index instead of value
+// testing with equality
+console.log(movements.includes(-130));
 
-const latestLargeMovementIndex = movements.findLastIndex(mov => mov > 1000);
+// check if there is any
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);
 
-console.log(latestLargeMovementIndex);
-console.log(
-  `Your latest large movement was ${movements.length - latestLargeMovementIndex} movements age`,
-);
+// we can write the inclues with some
+// console.log(movements.some(mov => mov === -130));
+
+// check if all satisfy the condition
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// seperate callback
+// better practice in the direction of DRY principals
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
