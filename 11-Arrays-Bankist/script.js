@@ -177,3 +177,26 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    // similar to .indexOf(23)
+    // but with findIndex we can pass in a call back function
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username,
+    );
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+
+  inputClosePin.value = inputCloseUsername.value = '';
+});
