@@ -230,24 +230,42 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
-// Array Grouping
-console.log(movements);
+// us literally filling up the arrays
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
 
-const groupedMovements = Object.groupBy(movements, movement =>
-  movement > 0 ? 'deposits' : 'withdrawals',
-);
-console.log(groupedMovements);
+// this will make an array with 7 empty elements
+const x = new Array(7);
+console.log(x);
+// we may think this is the right thing buth it's not
+// console.log(x.map(() => 5));
+// the only thing we can call is the .fill() method
+// x.fill(1);
+x.fill(1, 3, 5); // value, start index, end index(not included)
+console.log(x);
 
-const groupByActivity = Object.groupBy(accounts, account => {
-  const movementCount = account.movements.length;
+arr.fill(23, 2, 6);
+console.log(arr);
 
-  if (movementCount >= 8) return 'very active';
-  if (movementCount >= 4) return 'active';
-  if (movementCount >= 1) return 'moderate';
-  return 'inactive';
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z);
+
+// .from() is quite useful in transforming array like structures into arrays
+// we can use the array's usefull properties on
+
+// one such structures is the querySeletorAll pattern
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', '')),
+  );
+  console.log(movementsUI);
+
+  // another way
+  // buth the .form() is much cleaner!!!!!!!!!!!!!!!!!
+  const movementsUI2 = [...document.querySelectorAll('.movements__vlaue')];
 });
-console.log(groupByActivity);
-
-// const groupedAccounts = Object.groupBy(accounts, account => account.type);
-const groupedAccounts = Object.groupBy(accounts, ({ type }) => type);
-console.log(groupedAccounts);
