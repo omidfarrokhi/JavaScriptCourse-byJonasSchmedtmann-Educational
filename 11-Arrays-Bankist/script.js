@@ -230,42 +230,17 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
-// us literally filling up the arrays
-const arr = [1, 2, 3, 4, 5, 6, 7];
-console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+console.log(movements);
+const reversedMov = movements.reverse(); // this will mutate
+// const reversedMov = movements.slice().reverse(); // we can do this to don't mutate
+// better we can do
+// const reversedMov = movements.toReversed();
+console.log(reversedMov);
+console.log(movements);
 
-// this will make an array with 7 empty elements
-const x = new Array(7);
-console.log(x);
-// we may think this is the right thing buth it's not
-// console.log(x.map(() => 5));
-// the only thing we can call is the .fill() method
-// x.fill(1);
-x.fill(1, 3, 5); // value, start index, end index(not included)
-console.log(x);
+// toSorted (sort),
+// toSpliced(splice)
 
-arr.fill(23, 2, 6);
-console.log(arr);
-
-// Array.from
-const y = Array.from({ length: 7 }, () => 1);
-console.log(y);
-
-const z = Array.from({ length: 7 }, (cur, i) => i + 1);
-console.log(z);
-
-// .from() is quite useful in transforming array like structures into arrays
-// we can use the array's usefull properties on
-
-// one such structures is the querySeletorAll pattern
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent.replace('€', '')),
-  );
-  console.log(movementsUI);
-
-  // another way
-  // buth the .form() is much cleaner!!!!!!!!!!!!!!!!!
-  const movementsUI2 = [...document.querySelectorAll('.movements__vlaue')];
-});
+// single element
+movements[1] = 2000; // mutate
+const newMovements = movements.with(1, 2000); // don't mutate
