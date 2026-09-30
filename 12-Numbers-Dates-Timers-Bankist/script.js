@@ -248,6 +248,7 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
+/*
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -338,3 +339,17 @@ console.log((2.7).toFixed(0)); // WARN: this returns a String not a Number
 console.log((2.7).toFixed(3));
 console.log((2.345).toFixed(2));
 console.log(+(2.345).toFixed(2)); // converting to Number
+*/
+
+// the Remainder Operator
+console.log(5 % 2);
+console.log(8 % 3);
+
+// even or odd?
+console.log(6 % 2); // even
+console.log(7 % 2); // odd
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(532));
