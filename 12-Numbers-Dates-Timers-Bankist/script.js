@@ -502,7 +502,7 @@ console.log(new Date(2142244380000));
 // set versions
 future.setFullYear(2040); // also setDate, setDay, setHours, ...
 console.log(future);
-*/
+
 
 const future = new Date(2037, 10, 19, 15, 23);
 console.log(Number(future));
@@ -512,3 +512,22 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 24));
 console.log(days1);
+*/
+
+const num = 3884764.23;
+
+const options = {
+  // style: 'currency'
+  style: 'unit',
+  unit: 'mile-per-hour',
+  // currency: 'EUR'
+  // useGrouping: false (don't seperate digits 3 by 3)
+};
+
+console.log('US:', new Intl.NumberFormat('en-US', options).format(num));
+console.log('Germany:', new Intl.NumberFormat('de-DE', options).format(num));
+console.log('Syria:', new Intl.NumberFormat('ar-SY', options).format(num));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num),
+);
