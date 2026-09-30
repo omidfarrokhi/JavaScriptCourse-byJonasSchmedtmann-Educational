@@ -375,7 +375,7 @@ const transferFee2 = 1_500;
 console.log(Number(230000));
 console.log(Number('230_000'));
 console.log(Number.parseInt('230_000'));
-*/
+
 
 // in JS Numbers are 64 bits
 console.log(2 ** 53 - 1); // only 53 is used for number
@@ -410,3 +410,42 @@ console.log(huge + 'is really big!!!!!!!!'); // this works!!
 // Divisions
 console.log(10n / 3n);
 console.log(10 / 3);
+*/
+
+// Creating a date
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Sep 30 2026 19:55:00 '));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+// the mounths are zero indexed ;(
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+// if you give something imposibel it is smart enough to convert
+console.log(new Date(2037, 10, 33)); // Dec 03
+
+// number of miliseconds past the standart Unix time
+// (Jan 1, 1970)
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // 3 days later (Jan 3)
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+// never used this this is OG (before Y2K)
+// console.log(future.getYear());
+console.log(future.getDate()); // this is weird but the day is used for day of the week
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime()); // mili-seconds past since jan1, 1970
+
+console.log(new Date(2142244380000));
+
+// set versions
+future.setFullYear(2040); // also setDate, setDay, setHours, ...
+console.log(future);
