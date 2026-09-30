@@ -190,6 +190,21 @@ currentAccount = account1;
 updateUI(account1);
 containerApp.style.opacity = 100;
 
+// Experimenting API
+const now = new Date();
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  weekday: 'long',
+};
+const locale = navigator.language;
+console.log(locale);
+
+labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now);
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -214,7 +229,7 @@ btnLogin.addEventListener('click', function (e) {
     const hour = `${now.getHours() + 1}`.padStart(2, 0);
     const min = `${now.getMinutes() + 1}`.padStart(2, 0);
     labelDate.textContent = `${day}/${month}/${year}, ${hour}:
-${min}`;
+    ${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
