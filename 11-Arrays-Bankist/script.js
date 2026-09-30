@@ -230,57 +230,65 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
-// Array Methods Practice
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John', 'Leo'] },
+  { weight: 18, curFood: 244, owners: ['Joe'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
 
 // 1.
-const bankDepositSum = accounts
-  .flatMap(acc => acc.movements)
-  .filter(mov => mov > 0)
-  .reduce((sum, cur) => sum + cur, 0);
+dogs.forEach(dog => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28)));
+console.log(dogs);
 
 // 2.
-// const numDeposits1000 = accounts
-//   .flatMap(acc => acc.movements)
-//   .filter(mov => mov >= 1000).length;
-const numDeposits1000 = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
-
-// you can't use ++
-// because it returns the pre increment value
-// let a = 10;
-// console.log(a++);
-// console.log(a);
-// solution: use ++a;
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(
+  `Sarah's dog eats too ${sarahDog.curFood > sarahDog.recFood ? 'much' : 'little'}`,
+);
 
 // 3.
-const sums = accounts
-  .flatMap(acc => acc.movements)
-  .reduce(
-    (sums, cur) => {
-      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
-      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
-      return sums;
-    },
-    { deposits: 0, withdrawals: 0 },
-  );
+const ownersTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+const ownersTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
 
-console.log(sums);
+console.log(ownersTooMuch);
+console.log(ownersTooLittle);
 
 // 4.
-const convertTitleCase = function (title) {
-  const capitalize = str => str[0].toUpperCase() + str.slice(1);
-  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+console.log(`${ownersTooMuch.join(' ')}'s dogs are eating too much`);
+console.log(`${ownersTooLittle.join(' ')}'s dogs are eating too little`);
 
-  const titleCase = title
-    .toLowerCase()
-    .split(' ')
-    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
-    .join(' ');
+// 5.
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
 
-  return capitalize(titleCase);
-};
+// 6.
+const checkEatingOkay = dog => dog =>
+  dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9;
+console.log(dogs.every(dog => checkEatingOkay(dog)));
 
-console.log(convertTitleCase('this is a nice title'));
-console.log(convertTitleCase('this is a LONG title but not too lonG'));
-console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+// 7.
+const dogsEatingOkay = dogs.filter(checkEatingOkay);
+console.log(dogsEatingOkay);
+
+// 8.
+const dogsGroupedByPortion = Object.groupBy(dogs, dog => {
+  if (dog.curFood > dog.recFood) return 'too-much';
+  else if (dog.curFood < dog.recFood) return 'too-little';
+  else return 'exact';
+});
+console.log(dogsGroupedByPortion);
+
+// 9.
+const dogsGroupedByOwners = Object.groupBy(
+  dogs,
+  dog => `${dog.owners.length}-owners`,
+);
+console.log(dogsGroupedByOwners);
+
+// 10.
+console.log(dogs.toSorted((a, b) => a.recFood - b.recFood));
