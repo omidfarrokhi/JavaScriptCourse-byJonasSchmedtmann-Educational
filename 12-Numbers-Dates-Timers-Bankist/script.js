@@ -185,14 +185,41 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // in each call , print the time to the UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // when 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    // decrease 1s
+    time--;
+  };
+
+  // set time to 5 min
+  let time = 120;
+  // call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(account1);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(account1);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -231,6 +258,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -260,6 +291,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer;
   }
 });
 
@@ -278,6 +313,10 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+
+      // Reset timer
+      clearInterval(timer);
+      timer = startLogOutTimer;
     }, 2500);
   }
   inputLoanAmount.value = '';
@@ -312,255 +351,3 @@ btnSort.addEventListener('click', function (e) {
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
-
-/*
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-// JS doesn't treat int and float differently
-// unlike most programming languages
-console.log(23 === 23.0);
-
-// the classid JS jokes :)))))
-console.log(0.1 + 0.2);
-console.log(0.1 + 0.2 === 0.3); // false ;/
-
-// Conversion
-// easier type convert to Number
-// using +
-console.log(+'23');
-console.log(+'23');
-
-// Parsing
-//// int
-console.log(Number.parseInt('30px', 10));
-console.log(Number.parseInt('e23', 10));
-
-//// float
-console.log(Number.parseInt('  2.5rem'));
-console.log(Number.parseFloat('      2.5rem'));
-
-// this functions are actually global and can be called like:
-// console.log(parseFloat('   2.5rem'));
-// but in modern JS it's incouraged to not do so
-
-// isNaN
-console.log(Number.isNaN(23));
-console.log(Number.isNaN('20'));
-console.log(Number.isNaN(+'20X'));
-console.log(Number.isNaN(23 / 0));
-
-// isNan is wierd
-//// isFinite is a better option
-console.log(Number.isFinite(20));
-console.log(Number.isFinite('20'));
-console.log(Number.isFinite(+'20X'));
-console.log(Number.isFinite(23 / 0));
-
-console.log(Number.isInteger(23));
-console.log(Number.isInteger(23.0));
-console.log(Number.isInteger(23 / 0));
-
-// Square root
-console.log(Math.sqrt(25));
-console.log(25 ** (1 / 2));
-console.log(8 ** (1 / 3));
-
-console.log(Math.max(5, 18, 23, 11, 2));
-console.log(Math.max(5, 18, '23', 11, 2)); // it does type coartion
-console.log(Math.max(5, 18, '23px', 11, 2)); // it does not do parsing
-
-console.log(Math.min(5, 18, 23, 11, 2)); // it does not do parsing
-
-console.log(Math.PI * Number.parseFloat('10px') ** 2);
-
-// Random generation
-console.log(Math.trunc(Math.random() * 6) + 1);
-
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-console.log(randomInt(10, 20));
-console.log(randomInt(0, 3));
-
-// Rounding integers
-console.log(Math.trunc(23.3));
-
-console.log(Math.round(23.3));
-console.log(Math.round(23.9));
-
-console.log(Math.ceil(23.3));
-console.log(Math.ceil(23.9));
-
-console.log(Math.floor(23.3));
-console.log(Math.floor(23.9));
-
-console.log(Math.trunc(-23.3));
-console.log(Math.floor(-23.3));
-
-// Rounding decimals
-console.log((2.7).toFixed(0)); // WARN: this returns a String not a Number
-console.log((2.7).toFixed(3));
-console.log((2.345).toFixed(2));
-console.log(+(2.345).toFixed(2)); // converting to Number
-
-
-// the Remainder Operator
-console.log(5 % 2);
-console.log(8 % 3);
-
-// even or odd?
-console.log(6 % 2); // even
-console.log(7 % 2); // odd
-
-const isEven = n => n % 2 === 0;
-console.log(isEven(8));
-console.log(isEven(23));
-console.log(isEven(532));
-
-
-// Numeric Separators
-//// 287,460,000,000
-const diameter = 287_460_000_000;
-console.log(diameter);
-
-const price = 245_99;
-console.log(price);
-
-//// the same number
-const transferFee1 = 15_00;
-const transferFee2 = 1_500;
-
-// you can't put after dot, at start or at the end
-// const PI = 3._1415
-
-//// don't use on these situations
-//// JS won't understand how to convert or parse correctly
-console.log(Number(230000));
-console.log(Number('230_000'));
-console.log(Number.parseInt('230_000'));
-
-
-// in JS Numbers are 64 bits
-console.log(2 ** 53 - 1); // only 53 is used for number
-console.log(Number.MAX_SAFE_INTEGER);
-
-// starting from ES 2020
-// BigInt
-console.log(23546235724652356235634745762435672453634n);
-console.log(BigInt(32453451));
-
-// Operations
-console.log(10000n + 10000n);
-console.log(45183247553453847592347952n * 34857398475983742598472957398745n);
-
-const huge = 3458347572348572390175463467537n;
-const num = 23;
-// Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
-// console.log(huge * num);
-console.log(huge * BigInt(num));
-// also the Math functions doesn't work
-// console.log(Math.sqrt(16n));
-
-// but comparison works
-console.log(23n > 15);
-// the strice equality also doesn't work
-console.log(23n === 23); // false ;(
-// but the loose one do
-console.log(23n == 23); // true
-
-console.log(huge + 'is really big!!!!!!!!'); // this works!!
-
-// Divisions
-console.log(10n / 3n);
-console.log(10 / 3);
-
-
-// Creating a date
-const now = new Date();
-console.log(now);
-
-console.log(new Date('Sep 30 2026 19:55:00 '));
-console.log(new Date('December 24, 2015'));
-console.log(new Date(account1.movementsDates[0]));
-
-// the mounths are zero indexed ;(
-console.log(new Date(2037, 10, 19, 15, 23, 5));
-// if you give something imposibel it is smart enough to convert
-console.log(new Date(2037, 10, 33)); // Dec 03
-
-// number of miliseconds past the standart Unix time
-// (Jan 1, 1970)
-console.log(new Date(0));
-console.log(new Date(3 * 24 * 60 * 60 * 1000)); // 3 days later (Jan 3)
-
-// Working with dates
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(future);
-console.log(future.getFullYear());
-// never used this this is OG (before Y2K)
-// console.log(future.getYear());
-console.log(future.getDate()); // this is weird but the day is used for day of the week
-console.log(future.getDay());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.toISOString());
-console.log(future.getTime()); // mili-seconds past since jan1, 1970
-
-console.log(new Date(2142244380000));
-
-// set versions
-future.setFullYear(2040); // also setDate, setDay, setHours, ...
-console.log(future);
-
-
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(Number(future));
-
-const calcDaysPassed = (date1, date2) =>
-  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
-
-const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 24));
-console.log(days1);
-
-
-const num = 3884764.23;
-
-const options = {
-  // style: 'currency'
-  style: 'unit',
-  unit: 'mile-per-hour',
-  // currency: 'EUR'
-  // useGrouping: false (don't seperate digits 3 by 3)
-};
-
-console.log('US:', new Intl.NumberFormat('en-US', options).format(num));
-console.log('Germany:', new Intl.NumberFormat('de-DE', options).format(num));
-console.log('Syria:', new Intl.NumberFormat('ar-SY', options).format(num));
-console.log(
-  navigator.language,
-  new Intl.NumberFormat(navigator.language, options).format(num),
-);
-*/
-
-// setTimeout
-const ingredients = ['olives', 'spinach'];
-const pizzaTimer = setTimeout(
-  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
-  3000,
-  'olives',
-  'spinach',
-);
-console.log('Waiting...'); // it does not stop execution
-
-if (ingredients.includes('spinach')) {
-  clearTimeout(pizzaTimer);
-}
-
-// setInterval
-setInterval(function () {
-  const now = new Date();
-  console.log(now);
-}, 1000);
