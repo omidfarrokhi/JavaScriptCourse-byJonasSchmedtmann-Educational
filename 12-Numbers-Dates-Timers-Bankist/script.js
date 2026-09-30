@@ -353,7 +353,7 @@ const isEven = n => n % 2 === 0;
 console.log(isEven(8));
 console.log(isEven(23));
 console.log(isEven(532));
-*/
+
 
 // Numeric Separators
 //// 287,460,000,000
@@ -375,3 +375,38 @@ const transferFee2 = 1_500;
 console.log(Number(230000));
 console.log(Number('230_000'));
 console.log(Number.parseInt('230_000'));
+*/
+
+// in JS Numbers are 64 bits
+console.log(2 ** 53 - 1); // only 53 is used for number
+console.log(Number.MAX_SAFE_INTEGER);
+
+// starting from ES 2020
+// BigInt
+console.log(23546235724652356235634745762435672453634n);
+console.log(BigInt(32453451));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(45183247553453847592347952n * 34857398475983742598472957398745n);
+
+const huge = 3458347572348572390175463467537n;
+const num = 23;
+// Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+// console.log(huge * num);
+console.log(huge * BigInt(num));
+// also the Math functions doesn't work
+// console.log(Math.sqrt(16n));
+
+// but comparison works
+console.log(23n > 15);
+// the strice equality also doesn't work
+console.log(23n === 23); // false ;(
+// but the loose one do
+console.log(23n == 23); // true
+
+console.log(huge + 'is really big!!!!!!!!'); // this works!!
+
+// Divisions
+console.log(10n / 3n);
+console.log(10 / 3);
