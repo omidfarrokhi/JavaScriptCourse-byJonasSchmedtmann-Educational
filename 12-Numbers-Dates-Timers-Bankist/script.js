@@ -522,7 +522,7 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 24));
 console.log(days1);
-*/
+
 
 const num = 3884764.23;
 
@@ -541,3 +541,17 @@ console.log(
   navigator.language,
   new Intl.NumberFormat(navigator.language, options).format(num),
 );
+*/
+
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  'olives',
+  'spinach',
+);
+console.log('Waiting...'); // it does not stop execution
+
+if (ingredients.includes('spinach')) {
+  clearTimeout(pizzaTimer);
+}
