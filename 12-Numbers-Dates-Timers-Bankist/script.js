@@ -339,7 +339,7 @@ console.log((2.7).toFixed(0)); // WARN: this returns a String not a Number
 console.log((2.7).toFixed(3));
 console.log((2.345).toFixed(2));
 console.log(+(2.345).toFixed(2)); // converting to Number
-*/
+
 
 // the Remainder Operator
 console.log(5 % 2);
@@ -353,3 +353,25 @@ const isEven = n => n % 2 === 0;
 console.log(isEven(8));
 console.log(isEven(23));
 console.log(isEven(532));
+*/
+
+// Numeric Separators
+//// 287,460,000,000
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const price = 245_99;
+console.log(price);
+
+//// the same number
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+// you can't put after dot, at start or at the end
+// const PI = 3._1415
+
+//// don't use on these situations
+//// JS won't understand how to convert or parse correctly
+console.log(Number(230000));
+console.log(Number('230_000'));
+console.log(Number.parseInt('230_000'));
