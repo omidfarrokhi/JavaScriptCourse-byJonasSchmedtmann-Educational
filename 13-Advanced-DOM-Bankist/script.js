@@ -33,100 +33,39 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////////////
 ////////////////////////////////////////////////
 
-// Selecting elements
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
-const header = document.querySelector('.header');
-// returns NodeList (does not update)
-const allSections = document.querySelectorAll('.section');
-console.log(allSections);
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
-document.getElementById('section--1');
-// returns HTMLCollection (updates dynamically)
-const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
+  console.log(e.target.getBoundingClientRect());
 
-// HTMLCollection
-document.getElementsByClassName('btn');
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-// Creating and inserting elements
-// .insertAdjacentHTML
-const message = document.createElement('div'); // creates a DOM object
-message.classList.add('cookie-message');
-// message.textContent =
-// 'We use cookies for inproved functionality and analytics.';
-message.innerHTML =
-  'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it</button>';
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth,
+  );
 
-header.prepend(message); // adds as the first child
-header.append(message); // adds as teh last child
-// header.append(message.cloneNode(true)); // append just move the element it doesn't copy
+  // Scrolling
 
-// header.before(message); // insert before
-// header.after(message); // insert after
+  /// OLD SCHOOL WAY
 
-// Delete elements
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove(); // this is quite new (before we would have to select the parent and remove from there ;()
-    // message.parentElement.removeChild(message);
-  });
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset,
+  // );
 
-// Style
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
 
-// this does not work exept for the inline styles!!!!!!!
-// console.log(message.style.height);
-console.log(message.style.backgroundColor);
+  /// MODERN WAY
 
-// this won't give us the styles hidden inside CSS clases and applied
-// for that:
-console.log(getComputedStyle(message).color); // huge object of CSS Styles that we can take out from it what we want
-console.log(getComputedStyle(message).height);
-
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px';
-
-document.documentElement.style.setProperty('--color-primary', 'orangered');
-
-// Atributes
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
-// for standard attributes JS automatically creates them
-// but not for non-standards self-defineds
-console.log(logo.designer); // undefined
-console.log(logo.getAttribute('designer'));
-
-// we can also set
-logo.alt = 'Beautiful minimalist logo';
-
-// also for non-standards
-logo.setAttribute('company', 'Bankist');
-
-console.log(logo.src); //http://127.0.0.1:5500/img/logo.png (absolute)
-console.log(logo.getAttribute('src')); //img/logo.png (relative)
-
-const link = document.querySelector('.nav__link--btn');
-console.log(link.href); //http://127.0.0.1:5500/#
-console.log(link.getAttribute('href')); //#
-
-// Data attributes
-//// the attributes that starts with data-... (data-version-number="3.0")
-//// are stored in a dataset property!
-console.log(logo.dataset.versionNumber);
-
-// Classes
-// logo.classList.add();
-// logo.classList.remove();
-// logo.classList.toggle();
-// logo.classList.contains(); // not includes as in arrays ;/
-
-// Don't use
-//// this will override all previous classes written
-logo.className = 'jonas';
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
