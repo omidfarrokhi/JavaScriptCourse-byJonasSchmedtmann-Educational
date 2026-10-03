@@ -43,31 +43,38 @@ btnScrollTo.addEventListener('click', function (e) {
 
 ///////////////////////////////////////////////
 ////////////////////////////////////////////////
-// Page Navigation
+// DOM Traversing
 
-// document.querySelectorAll('.nav__link').forEach(function (el) {
-//   el.addEventListener('click', function (e) {
-//     e.preventDefault();
-//     const id = this.getAttribute('href');
-//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-//   });
-// });
+const h1 = document.querySelector('h1');
 
-// this is not efficient!!!!
-// adding the same function multiple time repeatedly
+// Going Downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes); // any kind of node
+console.log(h1.children); // just element node
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'red';
 
-// 1. Add event listener to common  partent element
-// 2. determine what element originated the event
+// Going Upwards: parents
+console.log(h1.parentNode); // any kind of node
+console.log(h1.parentElement); // just element node
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  e.preventDefault();
+// select closest header
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-  // Matching Strategy (probabely the hardest part)
-  // determine we actually clicked on that specific object not the borders
-  if (e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href');
-    document.querySelector(id).scrollIntoView({
-      behavior: 'smooth',
-    });
-  }
+// select itself
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going Sideways: siblings
+console.log(h1.previousElementSibling); // node
+console.log(h1.nextElementSibling); // node
+
+console.log(h1.previousSibling); // element
+console.log(h1.nextSibling); // element
+
+// we can get all the siblings
+// the only way is this
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
 });
