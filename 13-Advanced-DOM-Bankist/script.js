@@ -32,65 +32,36 @@ document.addEventListener('keydown', function (e) {
 
 ///////////////////////////////////////////////
 ////////////////////////////////////////////////
+// rgb(255, 255, 255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  // target: the element the event has happened on
+  // currentTarget: the element the handler is attached to (same as this)
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
 
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
-
-  console.log(e.target.getBoundingClientRect());
-
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
-
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth,
-  );
-
-  // Scrolling
-
-  /// OLD SCHOOL WAY
-
-  // window.scrollTo(
-  //   s1coords.left + window.pageXOffset,
-  //   s1coords.top + window.pageYOffset,
-  // );
-
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-
-  /// MODERN WAY
-
-  section1.scrollIntoView({ behavior: 'smooth' });
+  // Stop propagation (it's not really a good idea!!!!)
+  // e.stopPropagation();
 });
 
-const h1 = document.querySelector('h1');
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great! You are reading the heading :D');
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV', e.target, e.currentTarget);
+  },
+  // by default eventHandlers doesn't have anything to do with the Capture phase but we can tell them to do so:
+  // this will make the listener to handle on Capture instead of Bubble
 
-  // removing the handler on the same handler
-  h1.removeEventListener('mouseenter', alertH1);
-};
-
-h1.addEventListener('mouseenter', alertH1);
-
-// more old school way (the above is better nowdays)
-// h1.onmouseenter = function (e) {
-//   alert('addEventListener: Great! You are reading the heading :D');
-// };
-
-//  one advantage is addEventListener allows to add multiple functions but the direct method don't
-// another is we can easily remove it
-
-// we can remove after a certain amount of time
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
-
-// another way is directly on HTML (that is old and should not be used)
-// defining onClick directly on the HTML tag
+  //  true,
+);
