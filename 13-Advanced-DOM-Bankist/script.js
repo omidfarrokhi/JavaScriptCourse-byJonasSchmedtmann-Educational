@@ -1,12 +1,16 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
+// Elements Selection
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal Window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -30,38 +34,40 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+//////////////////////////////////////////////////
+// Button Scrolling
+
+btnScrollTo.addEventListener('click', function (e) {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
 ///////////////////////////////////////////////
 ////////////////////////////////////////////////
-// rgb(255, 255, 255)
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// Page Navigation
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  // target: the element the event has happened on
-  // currentTarget: the element the handler is attached to (same as this)
-  console.log('LINK', e.target, e.currentTarget);
-  console.log(e.currentTarget === this);
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
 
-  // Stop propagation (it's not really a good idea!!!!)
-  // e.stopPropagation();
-});
+// this is not efficient!!!!
+// adding the same function multiple time repeatedly
+
+// 1. Add event listener to common  partent element
+// 2. determine what element originated the event
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('CONTAINER', e.target, e.currentTarget);
+  e.preventDefault();
+
+  // Matching Strategy (probabely the hardest part)
+  // determine we actually clicked on that specific object not the borders
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
 });
-
-document.querySelector('.nav').addEventListener(
-  'click',
-  function (e) {
-    this.style.backgroundColor = randomColor();
-    console.log('NAV', e.target, e.currentTarget);
-  },
-  // by default eventHandlers doesn't have anything to do with the Capture phase but we can tell them to do so:
-  // this will make the listener to handle on Capture instead of Bubble
-
-  //  true,
-);
