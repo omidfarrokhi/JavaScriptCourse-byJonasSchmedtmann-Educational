@@ -279,3 +279,25 @@ const slider = function () {
 };
 slider();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// it is fired right after the HTML has been read and parsed (before images loading and all)
+
+// bacause we add out <script></script> tag at the end of the HTML file it is not necessary in vanilla JS
+// the DOM have already been read before reaching JS
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+// it is  fired after all content is loaded including the images
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// fired right before closing the browser (eg: for are u sure messages)
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault(); // not required on Chrome
+//   console.log(e);
+//   e.returnValue = '';
+// });
