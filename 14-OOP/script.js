@@ -25,3 +25,36 @@ const jack = new Person('Jack', 1975);
 console.log(matilda, jack);
 
 console.log(jonas instanceof Person);
+
+// Prototypes
+
+// every object created with the constructor will have access to a prototype object
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+jonas.calcAge();
+matilda.calcAge();
+jack.calcAge();
+
+// wierd but true!!!
+// the Person.prototype is not the prototype of Person
+// but the prototype of every Object created by the Person constructor
+// it should be actually called (.prototypeOfLinkedObjects)
+
+// defining and initializing the __proto__ property is done in step 3!!!!
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(jonas));
+console.log(Person.prototype.isPrototypeOf(matilda));
+console.log(Person.prototype.isPrototypeOf(Person));
+
+// a property not inside the object but in the prototype!!!!!!
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, matilda.species);
+
+console.log(jonas.hasOwnProperty('firstName'));
+console.log(jonas.hasOwnProperty('species'));
