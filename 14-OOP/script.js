@@ -1,24 +1,39 @@
 'use strice';
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// Class Expression
+// const PersonCl = class {};
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(this.speed);
-};
+// Class Declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
 
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(this.speed);
-};
+  calcAge() {
+    // these will be added to .prototype property not the object's properties
+    console.log(2037 - this.birthYear);
+  }
 
-const bmw = new Car('BMW', 120);
-const Mercedes = new Car('Mercedes', 95);
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
 
-bmw.accelerate();
-bmw.accelerate();
-bmw.brake();
-bmw.accelerate();
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// it's just a layer to hide defferences from other programming languages
+// it is not something new!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+jessica.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
