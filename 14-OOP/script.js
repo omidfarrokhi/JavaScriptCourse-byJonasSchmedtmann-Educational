@@ -1,7 +1,19 @@
 'use strice';
 
-// Class Expression
-// const PersonCl = class {};
+// Constuctor Pattern
+const Person = function (firstName, birthYear) {
+  // Instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+
+  // Methods
+  // never do this (never create method inside constructor)
+  // this.calcAge = function () {
+  //   console.log(2037 - this.birthYear);
+  // };
+};
+
+const jonas = new Person('Jonas', 1991);
 
 // Class Declaration
 class PersonCl {
@@ -31,6 +43,12 @@ class PersonCl {
 
   get fullName() {
     return this._fullName;
+  }
+
+  // Static Method
+  static hey() {
+    console.log('hey there!!!!!');
+    console.log(this);
   }
 }
 
@@ -76,3 +94,16 @@ console.log(jessica.age);
 // set
 account.latest = 50;
 console.log(account.movements);
+
+// Methods on the Constructor!
+Person.hey = function () {
+  console.log('hey there!!!!!!!!!');
+};
+
+Person.hey();
+
+// Uncaught TypeError: walter.hey is not a function
+// jonas.hey();
+// it is defined on the constructor not the Prototype!!!!!!!!!!!!!!!!!!!!
+
+PersonCl.hey();
