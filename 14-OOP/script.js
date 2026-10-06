@@ -1,132 +1,57 @@
 'use strice';
 
-// Constuctor Pattern
-const Person = function (firstName, birthYear) {
-  // Instance properties
-  this.firstName = firstName;
-  this.birthYear = birthYear;
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-  // Methods
-  // never do this (never create method inside constructor)
-  // this.calcAge = function () {
-  //   console.log(2037 - this.birthYear);
-  // };
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(this.speed);
+// };
 
-const jonas = new Person('Jonas', 1991);
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(this.speed);
+// };
 
-// Class Declaration
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
+// const bmw = new Car('BMW', 120);
+// const Mercedes = new Car('Mercedes', 95);
+
+// bmw.accelerate();
+// bmw.accelerate();
+// bmw.brake();
+// bmw.accelerate();
+
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  calcAge() {
-    // these will be added to .prototype property not the object's properties
-    console.log(2037 - this.birthYear);
+  accelerate() {
+    this.speed += 10;
+    console.log(this.speed);
   }
 
-  greet() {
-    console.log(`Hey ${this.firstName}`);
+  brake() {
+    this.speed -= 5;
+    console.log(this.speed);
   }
 
-  get age() {
-    return 2037 - this.birthYear;
+  get speedUS() {
+    return this.speed / 1.6;
   }
 
-  // set a property that already exists
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
-
-  get fullName() {
-    return this._fullName;
-  }
-
-  // Static Method
-  static hey() {
-    console.log('hey there!!!!!');
-    console.log(this);
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
   }
 }
 
-const jessica = new PersonCl('Jessica', 1996);
-console.log(jessica);
-jessica.calcAge();
-
-console.log(jessica.__proto__ === PersonCl.prototype);
-
-// it's just a layer to hide defferences from other programming languages
-// it is not something new!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
-
-// PersonCl.prototype.greet = function () {
-//   console.log(`Hey ${this.firstName}`);
-// };
-jessica.greet();
-
-// 1. Classes are NOT hoisted
-// 2. Classes are first-class citizens
-// 3. Classes are executed in strict mode
-
-const walter = new PersonCl('walter white', 1965);
-
-const account = {
-  owner: 'jonas',
-  movements: [200, 530, 120, 300],
-
-  get latest() {
-    return this.movements.slice(-1).pop();
-  },
-
-  set latest(mov) {
-    this.movements.push(mov);
-  },
-};
-
-// doesn't need calling just like normal properties
-
-// get
-console.log(account.latest);
-console.log(jessica.age);
-
-// set
-account.latest = 50;
-console.log(account.movements);
-
-// Methods on the Constructor!
-Person.hey = function () {
-  console.log('hey there!!!!!!!!!');
-};
-
-Person.hey();
-
-// Uncaught TypeError: walter.hey is not a function
-// jonas.hey();
-// it is defined on the constructor not the Prototype!!!!!!!!!!!!!!!!!!!!
-
-PersonCl.hey();
-
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
-
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
-
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'steven';
-steven.birthYear = 2002;
-steven.calcAge();
-
-console.log(steven.__proto__);
-
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 1979);
-sarah.calcAge();
+const ford = new Car('ford', 120);
+console.log(ford.speedUS);
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+ford.speedUS = 50;
+console.log(ford);
