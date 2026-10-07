@@ -1,107 +1,101 @@
 'use strice';
 
-//////////////////////////////////////////////////////////////////////
-/// Encapsulation: Private Class Fields and Methods
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
 
-// 1) Public fields
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(this.speed);
+};
 
-//// they should be on all instances and doesn't depend on a specific instance
-//// eg: the locale! (we define it outside the methods)
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(this.speed);
+};
 
-// 2) Private fields
+const EV = function (make, current, charge) {
+  Car.call(this, make, current);
+  this.charge = charge;
+};
 
-//// they are the same but can't be accessed from outside
-//// eg: the mission critical movement array! (we use private fields(#))
+// Link the prototypes
+EV.prototype = Object.create(Car.prototype);
 
-// 3) Public methods
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
 
-//// the regualr methods (APIs)
+// override the parent class method
+// Polymorphism!!!!!!!!!!!!!!!!!!!!!!!!!!1
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(`${this.make} is going at ${this.speed} km/h`);
+};
 
-// 4) Private methods (eg: approveLoan())
+const tesla = new EV('Tesla', 120, 23);
+tesla.chargeBattery(90);
 
-//// the #methods
-
-// STATIC versions of these 4
-
-//// are applied on the class itself not on the instances!
-//// there are also #(private) ones (they are only used on the inside of class)
-
-class Account {
-  locale = navigator.language;
-  bank = 'Bankist';
-  #movements = [];
-  #pin;
-
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
-
-    // this.movements = [];
-    // this.locale = navigator.language;
-
-    console.log(`Thanks for opening an account, ${owner}`);
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // Public interface
-  getMovements() {
-    return this.#movements;
-    // not chainable
+  accelerate() {
+    this.speed += 10;
+    console.log(this.speed);
   }
 
-  deposit(val) {
-    this.#movements.push(val);
+  brake() {
+    this.speed -= 5;
+    console.log(this.speed);
     return this;
   }
 
-  withdraw(val) {
-    this.deposit(-val);
-    return this;
+  get speedUS() {
+    return this.speed / 1.6;
   }
 
-  #approveLoan(val) {
-    return true;
-  }
-
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log('loan approved');
-    }
-    return this;
-  }
-
-  static TestStatic() {
-    console.log('Static test');
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+class EVCl extends CarCl {
+  #charge;
 
-// don't manipulate properties yourself like this:
-// acc1.movements.push(250);
-// acc1.movements.push(-140);
-acc1.deposit(250);
-acc1.withdraw(140);
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
 
-// but should we also be able to do these????
-acc1.requestLoan(1000);
-// acc1.approveLoan(1000); // ;(
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with a charge of ${this.#charge}`,
+    );
+    return this;
+  }
 
-Account.TestStatic();
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+}
 
-//////////////////////////////////////////////////
-// chaining
+const rivian = new EVCl('Rivian', 120, 23);
+console.log(rivian);
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(50)
+  .accelerate();
 
-acc1.deposit(300).withdraw(100).withdraw(50).requestLoan(25000).withdraw(4000);
-
-const movements = acc1
-  .deposit(300)
-  .withdraw(100)
-  .withdraw(50)
-  .requestLoan(25000)
-  .withdraw(4000)
-  .getMovements();
-
-console.log(acc1);
-console.log(movements);
+// childs inherit getters & setter from the parent
+console.log(rivian.speedUS);
