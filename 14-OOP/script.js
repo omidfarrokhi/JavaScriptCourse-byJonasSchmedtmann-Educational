@@ -1,57 +1,44 @@
 'use strice';
 
-// const Car = function (make, speed) {
-//   this.make = make;
-//   this.speed = speed;
-// };
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
 
-// Car.prototype.accelerate = function () {
-//   this.speed += 10;
-//   console.log(this.speed);
-// };
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
 
-// Car.prototype.brake = function () {
-//   this.speed -= 5;
-//   console.log(this.speed);
-// };
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  // Duplicate Code! so:
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
 
-// const bmw = new Car('BMW', 120);
-// const Mercedes = new Car('Mercedes', 95);
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+// Student.prototype = Person.prototype //u may think of this buyt it is completly wrong!!!!!!!!!!!
 
-// bmw.accelerate();
-// bmw.accelerate();
-// bmw.brake();
-// bmw.accelerate();
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
-class Car {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce(); // this it will get from the Student prototype
+mike.calcAge(); // this it will get from farther up the tree the Person prototype
 
-  accelerate() {
-    this.speed += 10;
-    console.log(this.speed);
-  }
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
 
-  brake() {
-    this.speed -= 5;
-    console.log(this.speed);
-  }
+// we have to fix a little thing
+// JS thinks the constructor of the Student.prototype is Person!
+// but we know it is the Student!
+// so we have to manually fix
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
 
-  get speedUS() {
-    return this.speed / 1.6;
-  }
-
-  set speedUS(speed) {
-    this.speed = speed * 1.6;
-  }
-}
-
-const ford = new Car('ford', 120);
-console.log(ford.speedUS);
-ford.accelerate();
-ford.accelerate();
-ford.brake();
-ford.speedUS = 50;
-console.log(ford);
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
