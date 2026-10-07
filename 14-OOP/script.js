@@ -1,59 +1,32 @@
 'use strice';
 
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+////////////////////////////
+// Inheritance between classes : Object.create
 
+const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
-  }
+  },
 
-  greet() {
-    console.log(`Hey ${this.fullName}`);
-  }
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    thisl.birthYear = birthYear;
+  },
+};
 
-  get age() {
-    return 2037 - this.birthYear;
-  }
+const steven = Object.create(PersonProto);
 
-  set fullName(name) {
-    if (name.inlcudes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
 
-  get fullName() {
-    return this._fullName;
-  }
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
-  static hey() {
-    console.log('hey there!!!!!!!!');
-  }
-}
-
-// Prototypes chaining happens automatically behind the scene :)
-class StudentCl extends PersonCl {
-  constructor(fullName, birthYear, course) {
-    // Always needs to happen first! (it is responsible for creating the this keyword)
-    super(fullName, birthYear);
-    this.course = course;
-  }
-
-  introduce() {
-    console.log(`My name is ${this.fullName} and I study ${this.course}`);
-  }
-
-  // polymorphism
-  calcAge() {
-    console.log(
-      `I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${
-        2037 - this.birthYear + 10
-      }`,
-    );
-  }
-}
-
-const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
-martha.introduce();
-martha.calcAge();
+const jay = Object.create(StudentProto);
+jay.init('jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge();
