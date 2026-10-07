@@ -1,39 +1,59 @@
 'use strice';
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(this.speed);
-};
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
 
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(this.speed);
-};
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
 
-const EV = function (make, current, charge) {
-  Car.call(this, make, current);
-  this.charge = charge;
-};
+  get age() {
+    return 2037 - this.birthYear;
+  }
 
-// Link the prototypes
-EV.prototype = Object.create(Car.prototype);
+  set fullName(name) {
+    if (name.inlcudes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
 
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
+  get fullName() {
+    return this._fullName;
+  }
 
-// override the parent class method
-// Polymorphism!!!!!!!!!!!!!!!!!!!!!!!!!!1
-EV.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge--;
-  console.log(`${this.make} is going at ${this.speed} km/h`);
-};
+  static hey() {
+    console.log('hey there!!!!!!!!');
+  }
+}
 
-const tesla = new EV('Tesla', 120, 23);
-tesla.chargeBattery(90);
+// Prototypes chaining happens automatically behind the scene :)
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first! (it is responsible for creating the this keyword)
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  // polymorphism
+  calcAge() {
+    console.log(
+      `I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`,
+    );
+  }
+}
+
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
