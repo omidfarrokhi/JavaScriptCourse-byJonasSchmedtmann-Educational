@@ -46,14 +46,17 @@ class Account {
   // Public interface
   getMovements() {
     return this.#movements;
+    // not chainable
   }
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   #approveLoan(val) {
@@ -65,6 +68,7 @@ class Account {
       this.deposit(val);
       console.log('loan approved');
     }
+    return this;
   }
 
   static TestStatic() {
@@ -85,3 +89,19 @@ acc1.requestLoan(1000);
 // acc1.approveLoan(1000); // ;(
 
 Account.TestStatic();
+
+//////////////////////////////////////////////////
+// chaining
+
+acc1.deposit(300).withdraw(100).withdraw(50).requestLoan(25000).withdraw(4000);
+
+const movements = acc1
+  .deposit(300)
+  .withdraw(100)
+  .withdraw(50)
+  .requestLoan(25000)
+  .withdraw(4000)
+  .getMovements();
+
+console.log(acc1);
+console.log(movements);
