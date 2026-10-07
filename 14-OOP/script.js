@@ -1,32 +1,46 @@
 'use strice';
 
-////////////////////////////
-// Inheritance between classes : Object.create
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
 
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    thisl.birthYear = birthYear;
-  },
-};
+  deposit(val) {
+    this.movements.push(val);
+  }
 
-const steven = Object.create(PersonProto);
+  withdraw(val) {
+    this.deposit(-val);
+  }
 
-const StudentProto = Object.create(PersonProto);
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
-  this.course = course;
-};
+  approveLoan(val) {
+    return true;
+  }
 
-StudentProto.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`);
-};
+  requestLoan() {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log('loan approved');
+    }
+  }
+}
 
-const jay = Object.create(StudentProto);
-jay.init('jay', 2010, 'Computer Science');
-jay.introduce();
-jay.calcAge();
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// don't manipulate properties yourself like this:
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+acc1.deposit(250);
+acc1.withdraw(140);
+
+// but should we also be able to do these????
+acc1.requestLoan(1000);
+acc1.approveLoan(1000); // ;(
+
+console.log(acc1);
