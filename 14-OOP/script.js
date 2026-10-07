@@ -1,44 +1,39 @@
 'use strice';
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
 };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(this.speed);
 };
 
-const Student = function (firstName, birthYear, course) {
-  // this.firstName = firstName;
-  // this.birthYear = birthYear;
-  // Duplicate Code! so:
-  Person.call(this, firstName, birthYear);
-  this.course = course;
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(this.speed);
 };
 
-// Linking prototypes
-Student.prototype = Object.create(Person.prototype);
-// Student.prototype = Person.prototype //u may think of this buyt it is completly wrong!!!!!!!!!!!
-
-Student.prototype.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+const EV = function (make, current, charge) {
+  Car.call(this, make, current);
+  this.charge = charge;
 };
 
-const mike = new Student('Mike', 2020, 'Computer Science');
-mike.introduce(); // this it will get from the Student prototype
-mike.calcAge(); // this it will get from farther up the tree the Person prototype
+// Link the prototypes
+EV.prototype = Object.create(Car.prototype);
 
-console.log(mike.__proto__);
-console.log(mike.__proto__.__proto__);
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
 
-// we have to fix a little thing
-// JS thinks the constructor of the Student.prototype is Person!
-// but we know it is the Student!
-// so we have to manually fix
-Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor);
+// override the parent class method
+// Polymorphism!!!!!!!!!!!!!!!!!!!!!!!!!!1
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(`${this.make} is going at ${this.speed} km/h`);
+};
 
-console.log(mike instanceof Student);
-console.log(mike instanceof Person);
-console.log(mike instanceof Object);
+const tesla = new EV('Tesla', 120, 23);
+tesla.chargeBattery(90);
