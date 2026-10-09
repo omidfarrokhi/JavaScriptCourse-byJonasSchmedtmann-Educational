@@ -74,7 +74,13 @@ class App {
   #workouts = [];
 
   constructor() {
+    // Get user's position
     this._getPosition();
+
+    // Get data from local storage
+    this._getlocalStorage();
+
+    // Attach event handlers
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -94,7 +100,6 @@ class App {
   _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.pt/maps/@${latitude},${longitude}`);
 
     const coords = [latitude, longitude];
 
@@ -107,6 +112,9 @@ class App {
 
     // Handling clicks on map
     this.#map.on('click', this._showForm.bind(this));
+
+    // Load previous markers from local storage data
+    this.#workouts.forEach(workout => this._renderWorkout(workout));
   }
 
   _showForm(mapE) {
@@ -188,6 +196,9 @@ class App {
 
     // hide form +clear input fields
     this._hideForm();
+
+    // set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -270,7 +281,30 @@ class App {
       },
     });
     // using the public interface
-    workout.click();
+    // workout.click();
+    // the LocalStorage doesn't presist the Prototype chain!!!!!!!!!!!!
+    // it's kind of a bummer ;/
+    // we can't use click that is on parents when extracted from local storage!
+  }
+
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  _getlocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+    console.log(data);
+
+    if (!data) return;
+
+    this.#workouts = data;
+
+    this.#workouts.forEach(workout => this._renderWorkout(workout));
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
