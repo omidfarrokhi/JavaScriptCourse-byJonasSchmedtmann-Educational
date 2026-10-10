@@ -91,6 +91,24 @@ const getCountryData = function (country) {
     .then(result => {
       const [data] = result.data.objects;
       renderCountry(data);
+      const neighbour = data.borders[0];
+
+      if (!neighbour) return;
+
+      // Country 2
+      return fetch(
+        `https://api.restcountries.com/countries/v5/codes.alpha_3/${neighbour}`,
+        {
+          headers: {
+            Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
+          },
+        },
+      );
+    })
+    .then(response => response.json())
+    .then(result => {
+      const [data] = result.data.objects;
+      renderCountry(data, 'neighbour');
     });
 };
 
