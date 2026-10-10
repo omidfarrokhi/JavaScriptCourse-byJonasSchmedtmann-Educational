@@ -1,20 +1,14 @@
 'use strict';
 
-//// OUTPUT ////
-// Test start
-// Test end
-// Resolved  promise 1
-// 0 sec timer
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lotter draw is happening 🔮');
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You WIN 💰');
+    } else {
+      reject(new Error('You lost your money 💩'));
+    }
+  }, 2000);
+});
 
-console.log('Test start');
-
-setTimeout(() => console.log('0 sec timer'), 0); // on callbacks queue
-
-Promise.resolve('Resolved promise 1').then(res => console.log(res)); // on micro-tasks queue
-
-Promise.resolve('Resolved promise 2').then(res => {
-  for (let i = 0; i < 100000000000; i++) {}
-  console.log(res);
-}); // on micro-tasks queue
-
-console.log('Test end');
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
