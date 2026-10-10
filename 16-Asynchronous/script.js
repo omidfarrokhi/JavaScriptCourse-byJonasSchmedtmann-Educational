@@ -88,7 +88,7 @@ const getCountryData = function (country) {
     },
   })
     .then(response => response.json())
-    .then(function (result) {
+    .then(result => {
       const [data] = result.data.objects;
       renderCountry(data);
     });
