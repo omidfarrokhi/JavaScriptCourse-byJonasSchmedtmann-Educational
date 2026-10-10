@@ -1,56 +1,48 @@
 'use strict';
 
-const lotteryPromise = new Promise(function (resolve, reject) {
-  console.log('Lotter draw is happening 🔮');
-  setTimeout(function () {
-    if (Math.random() >= 0.5) {
-      resolve('You WIN 💰');
-    } else {
-      reject(new Error('You lost your money 💩'));
-    }
-  }, 2000);
-});
-
-lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
-
-// Promisifying setTimout
 const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
   });
 };
 
-wait(2)
-  .then(() => {
-    console.log('1 seconds passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('2 seconds passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('3 seconds passed');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('4 seconds passed');
-    return wait(1);
+const imgContainer = document.querySelector('.images');
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    wait(2);
+    img.src = imgPath;
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found'));
+    });
   });
+};
 
-// Prior to Promises (callback hell x_X)
-// setTimeout(() => {
-//   console.log('1 seconds passed');
-//   setTimeout(() => {
-//     console.log('2 seconds passed');
-//     setTimeout(() => {
-//       console.log('3 seconds passed');
-//       setTimeout(() => {
-//         console.log('4 seconds passed');
-//       });
-//     });
-//   });
-// });
+let currentImg;
 
-Promise.resolve('abc').then(x => console.log(x));
-Promise.reject(new Error('Problem!')).catch(x => console.error(x));
+createImage('img/img-1.jpg')
+  .then(img => {
+    currentImg = img;
+    console.log('image 1 loaded');
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    currentImg = img;
+    console.log('image 2 loaded');
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = 'none';
+  })
+  .catch(err => console.error(err));
