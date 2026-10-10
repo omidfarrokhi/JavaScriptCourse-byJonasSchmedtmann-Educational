@@ -20,9 +20,27 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
-const whereAmI = async function (country) {
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  // Geolocation
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  // Reverse geocoding
+  const resGeo = await fetch(
+    `https://api-bdc.net/data/reverse-geocode?latitude=${lat}.93129&longitude=${lng}&localityLanguage=en&key=bdc_6a5aec4560744674b342fe77df1f8c78`,
+  );
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+
+  // Country data
   const res = await fetch(
-    `https://api.restcountries.com/countries/v5?q=${country}`,
+    `https://api.restcountries.com/countries/v5?q=${dataGeo.countryName}`,
     {
       headers: {
         Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
@@ -34,5 +52,5 @@ const whereAmI = async function (country) {
   console.log(data.objects[0]);
 };
 
-whereAmI('portugal');
+whereAmI();
 console.log('First');
