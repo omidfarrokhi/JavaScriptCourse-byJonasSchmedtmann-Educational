@@ -81,25 +81,17 @@ getCountryAndNeighbour('portugal');
 // getCountryAndNeighbour('palestine');
 */
 
-const request = fetch('https://api.restcountries.com/countries/v5?q=canada', {
-  headers: { Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b' },
-});
-console.log(request);
-
 const getCountryData = function (country) {
   fetch(`https://api.restcountries.com/countries/v5?q=${country}`, {
     headers: {
       Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
     },
   })
-    .then(function (response) {
-      console.log(response);
-      return response.json();
-    })
+    .then(response => response.json())
     .then(function (result) {
       const [data] = result.data.objects;
-      console.log(data);
       renderCountry(data);
     });
 };
+
 getCountryData('portugal');
