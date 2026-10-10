@@ -10,7 +10,6 @@ const countriesContainer = document.querySelector('.countries');
 // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
 
 ///////////////////////////////////////
-
 const renderCountry = function (data, className = '') {
   const html = `
     <article class="country ${className}">
@@ -27,108 +26,40 @@ const renderCountry = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
 };
 
-const renderError = function (msg) {
-  countriesContainer.insertAdjacentText('beforeend', msg);
-};
-/*
-
-const getCountryAndNeighbour = function (country) {
-  // AJAX call country
-  const request = new XMLHttpRequest();
-  request.open(
-    'GET',
-    `https://api.restcountries.com/countries/v5/names.common/${country}`,
-  );
-  request.setRequestHeader(
-    'Authorization',
-    'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
-  );
-  request.send();
-
-  request.addEventListener('load', function () {
-    const result = JSON.parse(this.responseText);
-    const [data] = result.data.objects;
-    console.log(data);
-
-    // Render country 1
-    renderCountry(data);
-
-    // Get neighbour country (2)
-    const neighbour = data.borders?.[0];
-
-    if (!neighbour) return;
-
-    // AJAX call country 2
-    const request2 = new XMLHttpRequest();
-    request2.open(
-      'GET',
-      `https://api.restcountries.com/countries/v5/codes.alpha_3/${neighbour}`,
-    );
-    request2.setRequestHeader(
-      'Authorization',
-      'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
-    );
-    request2.send();
-
-    request2.addEventListener('load', function () {
-      const result2 = JSON.parse(this.responseText);
-      const [data2] = result2.data.objects;
-      console.log(data2);
-
-      renderCountry(data2, 'neighbour');
-    });
-  });
-};
-
-getCountryAndNeighbour('portugal');
-// getCountryAndNeighbour('palestine');
-*/
-
-const getJSON = function (url, errorMsg = 'Somthing went wrong') {
-  return fetch(url, {
-    headers: {
-      Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
-    },
-  }).then(response => {
-    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
-
-    return response.json();
-  });
-};
-
-const getCountryData = function (country) {
-  // Country 1
-  getJSON(
-    `https://api.restcountries.com/countries/v5?q=${country}`,
-    'Country not found',
+const whereAmI = function (lat, lng) {
+  fetch(
+    `https://api-bdc.net/data/reverse-geocode?latitude=${lat}.93129&longitude=${lng}&localityLanguage=en&key=bdc_6a5aec4560744674b342fe77df1f8c78`,
   )
-    .then(result => {
-      const [data] = result.data.objects;
-      renderCountry(data);
-      const neighbour = data.borders[0];
+    .then(res => {
+      if (!res.ok) throw new Error('Problem with geocoding ${res.status}');
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.countryName}`);
 
-      if (!neighbour) throw new Error('No neighbour found!');
-
-      // Country 2
-      return getJSON(
-        `https://api.restcountries.com/countries/v5/codes.alpha_3/${neighbour}`,
-        'Country not found',
+      return fetch(
+        `https://api.restcountries.com/countries/v5?q=${data.countryName}`,
+        {
+          headers: {
+            Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
+          },
+        },
       );
     })
-    .then(result => {
-      const [data] = result.data.objects;
-      renderCountry(data, 'neighbour');
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found 9${res.status}`);
+      return res.json();
     })
-    .catch(err => {
-      console.error(`${err}💥💥💥💥`);
-      renderError(`Somthing went wrong💥💥💥💥
-        ${err.message}. Try again!`);
+    .then(dataRaw => {
+      console.log(dataRaw);
+      const [data] = dataRaw.data.objects;
+      console.log(data.names.common);
+      renderCountry(data.names.common);
     })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
+    .catch(err => console.log(`${err.message}💥`));
 };
 
-btn.addEventListener('click', function () {
-  getCountryData('portugal');
-});
+whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
