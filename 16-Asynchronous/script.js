@@ -84,31 +84,37 @@ getCountryAndNeighbour('portugal');
 // getCountryAndNeighbour('palestine');
 */
 
-const getCountryData = function (country) {
-  fetch(`https://api.restcountries.com/countries/v5?q=${country}`, {
+const getJSON = function (url, errorMsg = 'Somthing went wrong') {
+  return fetch(url, {
     headers: {
       Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
     },
-  })
-    .then(response => response.json())
+  }).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
+
+const getCountryData = function (country) {
+  // Country 1
+  getJSON(
+    `https://api.restcountries.com/countries/v5?q=${country}`,
+    'Country not found',
+  )
     .then(result => {
       const [data] = result.data.objects;
       renderCountry(data);
       const neighbour = data.borders[0];
 
-      if (!neighbour) return;
+      if (!neighbour) throw new Error('No neighbour found!');
 
       // Country 2
-      return fetch(
+      return getJSON(
         `https://api.restcountries.com/countries/v5/codes.alpha_3/${neighbour}`,
-        {
-          headers: {
-            Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
-          },
-        },
+        'Country not found',
       );
     })
-    .then(response => response.json())
     .then(result => {
       const [data] = result.data.objects;
       renderCountry(data, 'neighbour');
@@ -126,5 +132,3 @@ const getCountryData = function (country) {
 btn.addEventListener('click', function () {
   getCountryData('portugal');
 });
-
-getCountryData('awerawer');
