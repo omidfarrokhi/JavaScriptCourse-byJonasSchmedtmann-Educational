@@ -27,38 +27,41 @@ const getPosition = function () {
 };
 
 const whereAmI = async function () {
-  // Geolocation
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Reverse geocoding
-  const resGeo = await fetch(
-    `https://api-bdc.net/data/reverse-geocode?latitude=${lat}.93129&longitude=${lng}&localityLanguage=en&key=bdc_6a5aec4560744674b342fe77df1f8c78`,
-  );
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+    // Reverse geocoding
+    const resGeo = await fetch(
+      `https://api-bdc.net/data/reverse-geocode?latitude=${lat}.93129&longitude=${lng}&localityLanguage=en&key=bdc_6a5aec4560744674b342fe77df1f8c78`,
+    );
 
-  // Country data
-  const res = await fetch(
-    `https://api.restcountries.com/countries/v5?q=${dataGeo.countryName}`,
-    {
-      headers: {
-        Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    // Country data
+    const res = await fetch(
+      `https://api.restcountries.com/countries/v5?q=${dataGeo.countryName}`,
+      {
+        headers: {
+          Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
+        },
       },
-    },
-  );
-  const { data } = await res.json();
-  renderCountry(data.objects[0]);
-  console.log(data.objects[0]);
+    );
+
+    if (!res.ok) throw new Error('Problem getting location data');
+
+    const { data } = await res.json();
+    renderCountry(data.objects[0]);
+    console.log(data.objects[0]);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`💥 ${err.message}`);
+  }
 };
 
 whereAmI();
 console.log('First');
-
-try {
-  let y = 1;
-  const x = 2;
-  x = 3;
-} catch (err) {
-  alert(err.message);
-}
