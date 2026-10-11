@@ -97,37 +97,84 @@ const whereAmI = async function () {
 //   console.log('3: finished getting location');
 // })();
 
-const get3Countries = async function (c1, c2, c3) {
-  try {
-    // const data1 = await getJSON(
-    //   `https://api.restcountries.com/countries/v5?q=${c1}`,
-    // );
-    // const data2 = await getJSON(
-    //   `https://api.restcountries.com/countries/v5?q=${c2}`,
-    // );
-    // const data3 = await getJSON(
-    //   `https://api.restcountries.com/countries/v5?q=${c3}`,
-    // );
+// const get3Countries = async function (c1, c2, c3) {
+//   try {
+//     // const data1 = await getJSON(
+//     //   `https://api.restcountries.com/countries/v5?q=${c1}`,
+//     // );
+//     // const data2 = await getJSON(
+//     //   `https://api.restcountries.com/countries/v5?q=${c2}`,
+//     // );
+//     // const data3 = await getJSON(
+//     //   `https://api.restcountries.com/countries/v5?q=${c3}`,
+//     // );
 
-    // const dataObj1 = data1.data.objects[0];
-    // const dataObj2 = data2.data.objects[0];
-    // const dataObj3 = data3.data.objects[0];
+//     // const dataObj1 = data1.data.objects[0];
+//     // const dataObj2 = data2.data.objects[0];
+//     // const dataObj3 = data3.data.objects[0];
 
-    const data = await Promise.all([
-      getJSON(`https://api.restcountries.com/countries/v5?q=${c1}`),
-      getJSON(`https://api.restcountries.com/countries/v5?q=${c2}`),
-      getJSON(`https://api.restcountries.com/countries/v5?q=${c3}`),
-      ,
-    ]);
+//     const data = await Promise.all([
+//       getJSON(`https://api.restcountries.com/countries/v5?q=${c1}`),
+//       getJSON(`https://api.restcountries.com/countries/v5?q=${c2}`),
+//       getJSON(`https://api.restcountries.com/countries/v5?q=${c3}`),
+//       ,
+//     ]);
 
-    const dataObjs = data.map(d => {
-      d.data.objects[0];
-    });
+//     const dataObjs = data.map(d => {
+//       d.data.objects[0];
+//     });
 
-    console.log(dataObjs.map(d => d.capitals[0].name));
-  } catch (err) {
-    console.error(err);
-  }
+//     console.log(dataObjs.map(d => d.capitals[0].name));
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// get3Countries('portugal', 'canada', 'tanzania');
+
+// Promise.race
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://api.restcountries.com/countries/v5?q=italy`),
+    getJSON(`https://api.restcountries.com/countries/v5?q=egypt`),
+    getJSON(`https://api.restcountries.com/countries/v5?q=mexico`),
+  ]);
+  console.log(res);
+})();
+
+// it short circuit if one reject
+
+const timout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('request took too long'));
+    }, sec * 1000);
+  });
 };
 
-get3Countries('portugal', 'canada', 'tanzania');
+Promise.race([
+  getJSON(`https://api.restcountries.com/countries/v5?q=mexico`),
+  timout(1),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+// Promise.allSettled
+Promise.allSettled([
+  Promise.resolve('success'),
+  Promise.reject('error'),
+  Promise.resolve('another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+// the diffrence is allSettled won't short circuit and stoped once one is rejected! (in opposed to race)
+
+// Promise.any [ES2021]
+Promise.any([
+  Promise.resolve('success'),
+  Promise.reject('error'),
+  Promise.resolve('another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+// returns the first fullfiled Promise
