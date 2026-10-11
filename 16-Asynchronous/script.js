@@ -40,7 +40,6 @@ const whereAmI = async function () {
     if (!resGeo.ok) throw new Error('Problem getting location data');
 
     const dataGeo = await resGeo.json();
-    console.log(dataGeo);
 
     // Country data
     const res = await fetch(
@@ -56,12 +55,32 @@ const whereAmI = async function () {
 
     const { data } = await res.json();
     renderCountry(data.objects[0]);
-    console.log(data.objects[0]);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
   } catch (err) {
     console.error(`${err} 💥`);
     renderError(`💥 ${err.message}`);
+
+    // reject promise returned from async function
+    throw err;
   }
 };
 
-whereAmI();
-console.log('First');
+console.log('1: Will get location');
+// const city = whereAmI();
+// console.log(city); // it returns a pending Promise (not fullfiled or rejected at that point)
+
+whereAmI()
+  .then(city => console.log(`2: ${city}`))
+  .catch(err => console.error(`2: ${err.message}`))
+  .finally(() => console.log('3: finished getting location'));
+
+(async params => {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch {
+    console.error(`2: ${err.message}`);
+  }
+  console.log('3: finished getting location');
+})();
