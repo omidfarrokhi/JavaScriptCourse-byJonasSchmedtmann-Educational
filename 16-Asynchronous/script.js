@@ -99,25 +99,32 @@ const whereAmI = async function () {
 
 const get3Countries = async function (c1, c2, c3) {
   try {
-    const data1 = await getJSON(
-      `https://api.restcountries.com/countries/v5?q=${c1}`,
-    );
-    const data2 = await getJSON(
-      `https://api.restcountries.com/countries/v5?q=${c2}`,
-    );
-    const data3 = await getJSON(
-      `https://api.restcountries.com/countries/v5?q=${c3}`,
-    );
+    // const data1 = await getJSON(
+    //   `https://api.restcountries.com/countries/v5?q=${c1}`,
+    // );
+    // const data2 = await getJSON(
+    //   `https://api.restcountries.com/countries/v5?q=${c2}`,
+    // );
+    // const data3 = await getJSON(
+    //   `https://api.restcountries.com/countries/v5?q=${c3}`,
+    // );
 
-    const dataObj1 = data1.data.objects[0];
-    const dataObj2 = data2.data.objects[0];
-    const dataObj3 = data3.data.objects[0];
+    // const dataObj1 = data1.data.objects[0];
+    // const dataObj2 = data2.data.objects[0];
+    // const dataObj3 = data3.data.objects[0];
 
-    console.log(
-      dataObj1.capitals[0].name,
-      dataObj2.capitals[0].name,
-      dataObj3.capitals[0].name,
-    );
+    const data = await Promise.all([
+      getJSON(`https://api.restcountries.com/countries/v5?q=${c1}`),
+      getJSON(`https://api.restcountries.com/countries/v5?q=${c2}`),
+      getJSON(`https://api.restcountries.com/countries/v5?q=${c3}`),
+      ,
+    ]);
+
+    const dataObjs = data.map(d => {
+      d.data.objects[0];
+    });
+
+    console.log(dataObjs.map(d => d.capitals[0].name));
   } catch (err) {
     console.error(err);
   }
