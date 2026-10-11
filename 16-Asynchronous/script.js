@@ -26,6 +26,18 @@ const getPosition = function () {
   });
 };
 
+const getJSON = function (url, errorMsg = 'Somthing went wrong') {
+  return fetch(url, {
+    headers: {
+      Authorization: 'Bearer rc_live_7283c2df233f405bb2a3d7094791719b',
+    },
+  }).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
+
 const whereAmI = async function () {
   try {
     // Geolocation
@@ -66,21 +78,49 @@ const whereAmI = async function () {
   }
 };
 
-console.log('1: Will get location');
-// const city = whereAmI();
-// console.log(city); // it returns a pending Promise (not fullfiled or rejected at that point)
+// console.log('1: Will get location');
+// // const city = whereAmI();
+// // console.log(city); // it returns a pending Promise (not fullfiled or rejected at that point)
 
-whereAmI()
-  .then(city => console.log(`2: ${city}`))
-  .catch(err => console.error(`2: ${err.message}`))
-  .finally(() => console.log('3: finished getting location'));
+// whereAmI()
+//   .then(city => console.log(`2: ${city}`))
+//   .catch(err => console.error(`2: ${err.message}`))
+//   .finally(() => console.log('3: finished getting location'));
 
-(async params => {
+// (async params => {
+//   try {
+//     const city = await whereAmI();
+//     console.log(`2: ${city}`);
+//   } catch {
+//     console.error(`2: ${err.message}`);
+//   }
+//   console.log('3: finished getting location');
+// })();
+
+const get3Countries = async function (c1, c2, c3) {
   try {
-    const city = await whereAmI();
-    console.log(`2: ${city}`);
-  } catch {
-    console.error(`2: ${err.message}`);
+    const data1 = await getJSON(
+      `https://api.restcountries.com/countries/v5?q=${c1}`,
+    );
+    const data2 = await getJSON(
+      `https://api.restcountries.com/countries/v5?q=${c2}`,
+    );
+    const data3 = await getJSON(
+      `https://api.restcountries.com/countries/v5?q=${c3}`,
+    );
+
+    const dataObj1 = data1.data.objects[0];
+    const dataObj2 = data2.data.objects[0];
+    const dataObj3 = data3.data.objects[0];
+
+    console.log(
+      dataObj1.capitals[0].name,
+      dataObj2.capitals[0].name,
+      dataObj3.capitals[0].name,
+    );
+  } catch (err) {
+    console.error(err);
   }
-  console.log('3: finished getting location');
-})();
+};
+
+get3Countries('portugal', 'canada', 'tanzania');
