@@ -1,39 +1,21 @@
-// importing module
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 
-console.log('importing module');
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 4 },
+  ],
+  user: { loggedIn: true },
+};
 
-// the intent of writing this is not code re-use
-// only to create new scope and return data only once!!!
-const shippingCart2 = (function () {
-  const cart = [];
-  const shippingCost = 10;
-  const totalPrice = 237;
-  const totalQuantity = 23;
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
 
-  const addToCart = function (product, quantity) {
-    cart.push({ product, quantity });
-    console.log(
-      `${quantity} ${product} added to cart (shipping cost is ${shippingCost})`,
-    );
-  };
+state.user.loggedIn = false;
+console.log(stateClone); // it will be mutated :(
 
-  const orderStock = function (product, quantity) {
-    console.log(`${quantity} ${product} ordered from supplier`);
-  };
+// it's not an actual full scale copy
+// it's a good idea to use Lodash!!!!!
+//// an open-source module that implement usefull JS methods
 
-  return {
-    addToCart,
-    cart,
-    totalPrice,
-    totalQuantity,
-  };
-})();
-
-shippingCart2.addToCart('apple', 4);
-shippingCart2.addToCart('pizza', 2);
-console.log(shippingCart2);
-console.log(shippingCart2.shippingCost); // not accessible (like private properties)
-
-///////////////////////////////////
-///////the reason why all this works is CLOSURES///////////
-///////////we have run the function and it has returned and it is over but still the addToCart can access the unexported (not returned) properties any time we call it!!!!!!!!!!!!
+console.log(stateDeepClone);
