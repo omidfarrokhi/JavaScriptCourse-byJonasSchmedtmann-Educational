@@ -1,44 +1,39 @@
 // importing module
-// import './shoppingCart.js';
-// import { addToCart, totalPrice as price, totalQuantity } from './shoppingCart';
-// addToCart('bread', 5);
-// console.log(price, totalQuantity);
-
-// import * as shoppingCart from './shoppingCart.js';
 
 console.log('importing module');
-// shoppingCart.addToCart('bread', 5);
-// console.log(shoppingCart.totalPrice);
 
-import add, { cart } from './shoppingCart.js';
-add('pizza', 2);
-add('bread', 5);
-add('apples', 4);
+// the intent of writing this is not code re-use
+// only to create new scope and return data only once!!!
+const shippingCart2 = (function () {
+  const cart = [];
+  const shippingCost = 10;
+  const totalPrice = 237;
+  const totalQuantity = 23;
 
-console.log(cart); // the exports are dynamic (they reflect the changes)
+  const addToCart = function (product, quantity) {
+    cart.push({ product, quantity });
+    console.log(
+      `${quantity} ${product} added to cart (shipping cost is ${shippingCost})`,
+    );
+  };
 
-// Top-level await is only available in the module scripts
-// it's not that efficient because it blocks module execution
+  const orderStock = function (product, quantity) {
+    console.log(`${quantity} ${product} ordered from supplier`);
+  };
 
-// console.log('Start fetching');
-// const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-// const data = await res.json();
-// console.log(data);
-// console.log('Something');
+  return {
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+  };
+})();
 
-const getLastPost = async function () {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const data = await res.json();
-  console.log(data);
+shippingCart2.addToCart('apple', 4);
+shippingCart2.addToCart('pizza', 2);
+console.log(shippingCart2);
+console.log(shippingCart2.shippingCost); // not accessible (like private properties)
 
-  return { title: data.at(-1).title, text: data.at(-1).body };
-};
-
-// calling async function alwayysss returns a promise
-const lastPost = getLastPost();
-console.log(lastPost);
-
-// lastPost.then(last => console.log(last)); // not very clean
-
-const lastPost2 = await getLastPost();
-console.log(lastPost2);
+///////////////////////////////////
+///////the reason why all this works is CLOSURES///////////
+///////////we have run the function and it has returned and it is over but still the addToCart can access the unexported (not returned) properties any time we call it!!!!!!!!!!!!
