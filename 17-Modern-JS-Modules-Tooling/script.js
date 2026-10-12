@@ -1,4 +1,6 @@
 import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import add, { cartl } from './shoppingCart.js';
+add('pizza', 2);
 
 const state = {
   cart: [

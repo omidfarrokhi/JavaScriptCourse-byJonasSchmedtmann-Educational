@@ -7,10 +7,13 @@
   "type": "commonjs",
   "main": "clean.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
+    "@swc/core": "^1.16.18",
     "leaflet": "^1.9.4",
-    "lodash-es": "^4.18.1"
+    "lodash-es": "^4.18.1",
+    "parcel": "^2.16.4"
   }
 }
