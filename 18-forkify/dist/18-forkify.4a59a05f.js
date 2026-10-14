@@ -716,7 +716,8 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"7dWZ8":[function(require,module,exports,__globalThis) {
 // import icons from '../img/icons.svg'; // Parcel 1
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js");
+var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', showRecipe);
+ // window.addEventListener('load', showRecipe);
 var _iconsSvg = require("url:../img/icons.svg"); // Parcel 2
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _runtime = require("regenerator-runtime/runtime");
@@ -744,9 +745,12 @@ const renderSpinner = function(parentEl) {
 };
 const showRecipe = async function() {
     try {
+        const id = window.location.hash.slice(1);
+        console.log(id);
+        if (!id) return;
         // 1. Loading the recipe
         renderSpinner(recipeContainer);
-        const res = await fetch('https://forkify-api.jonas.io/api/v2/recipes/5ed6604591c37cdc054bc886?key=a2aa4d0d-afec-45fa-8be7-c3087b114fc0');
+        const res = await fetch(`https://forkify-api.jonas.io/api/v2/recipes/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
         console.log(res, data);
@@ -857,6 +861,10 @@ const showRecipe = async function() {
     }
 };
 showRecipe();
+[
+    'hashchange',
+    'load'
+].forEach((ev)=>window.addEventListener(ev, showRecipe));
 
 },{"core-js/modules/web.immediate.js":"bzsBv","url:../img/icons.svg":"fd0vu","regenerator-runtime/runtime":"f6ot0","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"bzsBv":[function(require,module,exports,__globalThis) {
 'use strict';
