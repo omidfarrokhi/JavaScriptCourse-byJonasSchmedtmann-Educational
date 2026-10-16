@@ -25,7 +25,7 @@
 118I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\instance\replace-all.js134363965633416546 0
 117I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\array\virtual\every.js134363965615243676 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\actual\typed-array\index.js134363965621086563 0
-71I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist134366282819472877 1
+71I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist134366339579223716 1
 117I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\symbol\to-primitive.js134363965638469709 0
 98I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\chalk\package.json134363853204637979 0
 96I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\dotenv\config.js134363853196381520 0
@@ -87,7 +87,7 @@
 123I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\es.data-view.get-float16.js134363965605977509 0
 95I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\json134363965638993072 1
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\code-point-at.js134363965602717917 0
-87I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\view.js134365508113121064 0
+87I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\view.js134366331956197841 0
 90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\parcel\src134363853208497961 1
 73I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js134365390993881153 1
 99I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@lezer\lr\README.md134363853213534975 0
@@ -199,7 +199,7 @@
 91I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\detect-libc134363853205098295 1
 108I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\string\italics.js134363965627729099 0
 117I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\actual\array\last-index-of.js134363965628860289 0
-87I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\controller.js134366282818092567 0
+87I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\controller.js134366336389934042 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\sass\types\value\argument_list.d.ts134363859039816497 0
 106I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\object\index.js134363965621360701 0
 84I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\helpers.js134365415265114743 0
@@ -220,7 +220,7 @@
 125I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@parcel\source-map\dist\wasm-bindings.js.flow134363853208066321 0
 114I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\typed-array\for-each.js134363965617490487 0
 133I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\src\_class_static_private_method_get.mjs134363853268280599 0
-82I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\model.js134365758447479974 0
+82I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\model.js134366333615336463 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\.bin\update-browserslist-db.ps1134363853278410000 0
 101I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\string134363965639906165 1
 109I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@parcel\transformer-image\lib134363853207476708 1
@@ -245,7 +245,7 @@
 103I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\supports-color\index.js134363853195884710 0
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\instance\to-sorted.js134363965638838357 0
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_ts_dispose_resources134363853266924700 1
-97I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\paginationView.js134366282579894032 0
+97I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\paginationView.js134366286079410039 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\msgpackr\dist\index-no-eval.cjs.map134363853229697389 0
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\array-buffer\index.js134363965622103154 0
 109I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\update-browserslist-db\cli.js134363853195897433 0
@@ -253,7 +253,7 @@
 104I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\baseline-browser-mapping134363853214275748 1
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\actual\array\virtual\fill.js134363965615428778 0
 148I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\ordered-binary\.nyc_output\5b6bd808-0399-4ee6-9395-344688761dfa.json134363853217537946 0
-93I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\recipeView.js134365504566484715 0
+93I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\src\js\views\recipeView.js134366339577932107 0
 112I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\find-last.js134363965616286614 0
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\es.symbol.replace.js134363965611029869 0
 103I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\picocolors\package.json134363853198196578 0
@@ -1164,7 +1164,7 @@
 133I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\cjs\_object_without_properties_loose.cjs134363853244325152 0
 125I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\lmdb\node_modules\node-addon-api\node_api.gyp134363853194049806 0
 114I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\source-map-js\lib\source-node.d.ts134363859041175866 0
-94I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.4a59a05f.js134366282819452898 0
+94I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.4a59a05f.js134366339579203701 0
 110I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\array\values.js134363965640915791 0
 128I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\mtest.c134363853246931232 0
 118I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\find-last-index.js134363965616152310 0
@@ -2358,7 +2358,7 @@
 118I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\es.symbol.match-all.js134363965610991907 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\caniuse-lite\data\regions\BO.js134363853244695313 0
 108I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\symbol\for.js134363965617682671 0
-95I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.f7626f62.css134366282581482402 0
+95I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.f7626f62.css134366338421927503 0
 102I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\dotenv-expand\tea.yaml134363853213185107 0
 112I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\proposals\global-this.js134363965619396175 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\symbol\search.js134363965633958151 0
@@ -2732,7 +2732,7 @@
 124I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\esnext.array.group-to-map.js134363965612261344 0
 133I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\reflect\get-own-property-descriptor.js134363965619018981 0
 121I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\typed-array\filter-reject.js134363965615693913 0
-82I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\index.html134366282581417343 0
+82I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\index.html134366338421535334 0
 109I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\iterator\join.js134363965628558304 0
 122I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\reflect\get-prototype-of.js134363965619174904 0
 114I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\stable\instance\reverse.js134363965633659144 0
@@ -3690,7 +3690,7 @@
 109I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\string\fontsize.js134363965617356804 0
 120I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\esnext.map.map-values.js134363965613375452 0
 120I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\internals\detach-transferable.js134363965604147979 0
-99I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.f7626f62.css.map134366282581482402 0
+99I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.f7626f62.css.map134366338421933493 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\esnext.map.merge.js134363965613413680 0
 112I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\esnext.map.of.js134363965613423723 0
 121I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\modules\esnext.symbol.metadata.js134363965614644907 0
@@ -4433,7 +4433,7 @@
 112I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\regexp\to-string.js134363965639220916 0
 109I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\reflect\apply.js134363965600978848 0
 108I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\features\set\find.js134363965616533987 0
-92I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\favicon.8b2f57bf.png134366282581372575 0
+92I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\favicon.8b2f57bf.png134366338421565300 0
 113I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\reflect\construct.js134363965603173339 0
 119I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\reflect\define-metadata.js134363965603797706 0
 119I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\full\reflect\delete-metadata.js134363965604013138 0
@@ -5524,7 +5524,7 @@
 107I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\fill.js134363965615481521 0
 107I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\find.js134363965616458423 0
 107I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\flat.js134363965617075374 0
-90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\icons.21bad73c.svg134366282581645714 0
+90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\icons.21bad73c.svg134366338421958644 0
 107I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@parcel\events\lib\types.js134363853213587898 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\index-of.js134363965620753608 0
 116I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\core-js\es\instance\last-index-of.js134363965628895503 0
@@ -6131,7 +6131,7 @@
 119I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@parcel\transformer-babel\src\babel7.js134363853197226758 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\caniuse-lite\data\regions\CO.js134363853252834006 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\caniuse-lite\data\regions\CY.js134363853263864989 0
-90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\icons.0809ef97.svg134366282581814801 0
+90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\icons.0809ef97.svg134366338422072242 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\caniuse-lite\data\regions\DK.js134363853264386770 0
 110I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@parcel\optimizer-html\LICENSE134363853193229228 0
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\caniuse-lite\data\regions\DZ.js134363853264950965 0
@@ -6679,7 +6679,7 @@
 111I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_apply_decs_2311134363853263822289 1
 125I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\esm\_class_private_field_init.js134363853253672108 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_array_like_to_array134363853263864989 1
-89I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\logo.726d37a8.png134366282581322590 0
+89I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\logo.726d37a8.png134366338421535334 0
 115I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_array_without_holes134363853263934533 1
 112I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_array_with_holes134363853263894966 1
 120I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\@swc\helpers\_\_async_generator_delegate134363853264012827 1
@@ -7586,7 +7586,7 @@
 107I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\node_modules\.bin\update-browserslist-db134363853278410000 0
 94I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.3464ddca.js134363859109132843 0
 98I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.3464ddca.js.map134363859109162836 0
-98I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.4a59a05f.js.map134366282819472877 0
+98I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.4a59a05f.js.map134366339579213721 0
 94I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.62406edb.js134363859109017777 0
 98I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\18-forkify.62406edb.js.map134363859109027791 0
 90I:\Code\JavaScriptCourse-byJonasSchmedtmann-Educational\18-forkify\dist\icons.7bd9dd61.svg134363958015870289 0
